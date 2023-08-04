@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Привязка пользователя к бронированиям (один клиент(пользователь) имеет несколько бронирований)
+    public function bookings()
+    {
+        return $this->HasMany(Booking::class);
+    }
 }
