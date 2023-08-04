@@ -33,20 +33,21 @@ class ExcursionController extends Controller
      */
     public function store(StoreRequest $request, Company $company)
     {
-        dump($request);
-
         $schedule = [];
         $data = $request->validated();
 
+        // Домножаем на 60, чтобы перевести секунды в минуты
+        $data['duration'] *= 60;
+
         foreach ($data['schedule'] as $key => $value) {
-//          preg_match_all("/[0-2]{0,1}[0-9]{0,1}:[0-5]{0,1}[0-9]{0,1}/", $data[$key][$value], $schedule[$key]);
-            dump($key);
-            dump($value);
-            echo "\n1111111111111\n";
+            $arr = [];
+            preg_match_all("/[0-2]{0,1}[0-9]{0,1}:[0-5]{0,1}[0-9]{0,1}/", $data['schedule'][$key], $arr);
+            $schedule[$key] = $arr[0];
+
+            unset($arr);
         }
-
-        dd($schedule);
-
+        $data['schedule'] = json_encode($schedule, JSON_UNESCAPED_UNICODE);
+        unset($schedule);
 
         $company->excursions()->create($data);
 

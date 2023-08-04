@@ -25,6 +25,8 @@
     <!-- Datepicker -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datepicker/css/datepicker.css') }}">
 
+    @yield('styles')
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

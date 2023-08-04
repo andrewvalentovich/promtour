@@ -26,13 +26,13 @@
                                 </div>
 
                                 <div class="form-group">
-                            <textarea
-                                name="description"
-                                id="admin_company_description_create_textarea"
-                                class="form-control"
-                                placeholder="Описание"
-                                cols="30" rows="10"
-                            >{{ old('description') }}</textarea>
+                                    <textarea
+                                        name="description"
+                                        id="admin_company_description_create_textarea"
+                                        class="form-control"
+                                        placeholder="Описание"
+                                        cols="30" rows="10"
+                                    >{{ old('description') }}</textarea>
                                     @error('description')
                                     <label class="text-danger font-weight-normal" for="description">{{ $message }}</label>
                                     @enderror
@@ -70,7 +70,7 @@
 
                                 <div class="form-group">
                                     <div class="input-group date">
-                                        <input type="text" id="excursions_create_days_off" name="days_off" value="{{ old('days_off') }}" class="form-control" placeholder="Выходные дни"/>
+                                        <input type="text" id="excursions_create_days_off" name="days_off" value="{{ old('days_off') }}" class="form-control" placeholder="Выходные дни" autocomplete="off"/>
                                         <div class="input-group-addon input-group-append">
                                             <div class="input-group-text">
                                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -144,7 +144,6 @@
                                                         <label class="text-danger font-weight-normal" for="sunday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

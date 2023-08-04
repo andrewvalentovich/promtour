@@ -26,9 +26,9 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'nullable|integer|max:10',
-            'max_participants_count_group' => 'nullable|integer|max:6',
-            'max_participants_count_client' => 'nullable|integer|max:6',
+            'price' => 'nullable|integer|size:10',
+            'max_participants_count_group' => 'nullable|integer|size:6',
+            'max_participants_count_client' => 'nullable|integer|size:6',
             'duration' => 'nullable|string',
             'schedule' => 'nullable|string',
         ];
@@ -44,11 +44,11 @@ class UpdateRequest extends FormRequest
             'name.max' => 'Максимальная длина данного поля не должна превышать 255 символов',
             'description.string' => 'Данное поле должно быть строкой',
             'price.integer' => 'Данное поле должно быть числом',
-            'price.max' => 'Максимальная длина данного поля не должна превышать 10 символов',
+            'price.size' => 'Максимальная длина данного поля не должна превышать 10 символов',
             'max_participants_count_group.integer' => 'Данное поле должно быть числом',
-            'max_participants_count_group.max' => 'Максимальная длина данного поля не должна превышать 6 символов',
+            'max_participants_count_group.size' => 'Максимальная длина данного поля не должна превышать 6 символов',
             'max_participants_count_client.integer' => 'Данное поле должно быть числом',
-            'max_participants_count_client.max' => 'Максимальная длина данного поля не должна превышать 6 символов',
+            'max_participants_count_client.size' => 'Максимальная длина данного поля не должна превышать 6 символов',
             'duration.string' => 'Данное поле должно быть строкой',
             'schedule.string' => 'Данное поле должно быть строкой',
         ];

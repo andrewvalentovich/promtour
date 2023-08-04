@@ -28,38 +28,19 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td style="width: 20px">#</td>
-                                        <td>Название</td>
+                                        <td style="width: 40px">#</td>
+                                        <td style="width: 200px">Название</td>
                                         <td>Короткое описание</td>
                                         <td style="width:330px;">Действия</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Update software</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
-                                    </tr>
                                     @foreach($excursions as $excursion)
                                         <tr>
                                             <td>{{ $excursion->id }}</td>
                                             <td>{{ $excursion->name }}</td>
-                                            <td>{{ $excursion->description }}</td>
+                                            <td>{{ \Illuminate\Support\Str::limit($excursion->description, 60) }}</td>
                                             <td class="project-actions">
-                                                <a class="btn btn-warning btn-sm" href="{{ route('admin.companies.excursions.index', $excursion->id) }}">
-                                                    <i class="fas fa-external-link-square-alt"></i>
-                                                    Фотографии
-                                                </a>
-                                                <a class="btn btn-warning btn-sm" href="#">
-                                                    <i class="fas fa-external-link-square-alt"></i>
-                                                    Экскурсии
-                                                </a>
-
                                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.excursions.show', $excursion->id) }}">
                                                     <i class="fas fa-folder"></i>
                                                     Открыть
