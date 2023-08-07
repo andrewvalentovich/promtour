@@ -36,9 +36,6 @@ class ExcursionController extends Controller
         $schedule = [];
         $data = $request->validated();
 
-        // Домножаем на 60, чтобы перевести секунды в минуты
-        $data['duration'] *= 60;
-
         foreach ($data['schedule'] as $key => $value) {
             $arr = [];
             preg_match_all("/[0-2]{0,1}[0-9]{0,1}:[0-5]{0,1}[0-9]{0,1}/", $data['schedule'][$key], $arr);
@@ -46,6 +43,7 @@ class ExcursionController extends Controller
 
             unset($arr);
         }
+
         $data['schedule'] = json_encode($schedule, JSON_UNESCAPED_UNICODE);
         unset($schedule);
 
@@ -75,8 +73,19 @@ class ExcursionController extends Controller
      */
     public function update(UpdateRequest $request, Excursion $excursion)
     {
+        $schedule = [];
         $data = $request->validated();
-        $excursion->update($data);
+
+        foreach ($data['schedule'] as $key => $value) {
+            $arr = [];
+            preg_match_all("/[0-2]{0,1}[0-9]{0,1}:[0-5]{0,1}[0-9]{0,1}/", $data['schedule'][$key], $arr);
+            $schedule[$key] = $arr[0];
+
+            unset($arr);
+        }
+
+        $data['schedule'] = json_encode($schedule, JSON_UNESCAPED_UNICODE);
+        unset($schedule);
 
         return redirect()->route('admin.excursions.show', compact('excursion'));
     }

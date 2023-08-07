@@ -24,4 +24,38 @@ class Excursion extends Model
     {
         return $this->HasMany(Booking::class);
     }
+
+    // $dates[$i]["date"] - Дата в формате "Y:m:d"
+    // $dates[$i]["day_of_the_week"] - День недели, например "monday"
+    // $dates[$i]["booking_times"] - Массив с временем записи в конкретный день 10:00, 20:00, 24:00 (для понедельника)
+    public function getDatesAttribute(): array
+    {
+        $dates = [];
+        for($i = 0; $i <= $this->active_days_for_booking; $i++) {
+            $dates[$i]["date"] = date("Y:m:d", strtotime(now()) + 86400 * $i);
+            $dates[$i]["day_of_the_week"] = $this->getDaysOfTheWeekArrayAttribute()[date("w", strtotime(now()) + 86400 * $i)];
+            $dates[$i]["booking_times"] = json_decode($this->schedule, true)[$dates[$i]["day_of_the_week"]];
+        }
+        return $dates;
+    }
+
+    // Данная функция возвращает массив, где каждый ключ массива соответствует определённому дню недели
+    public function getDaysOfTheWeekArrayAttribute(): array
+    {
+        return [
+            "0" => "sunday",
+            "1" => "monday",
+            "2" => "tuesday",
+            "3" => "wednesday",
+            "4" => "thursday",
+            "5" => "friday",
+            "6" => "saturday",
+        ];
+    }
+
+    // Данная функция декодированный JSON объект, а именно поле schedule
+    public function getDecodeScheduleAttribute(): array
+    {
+        return json_decode($this->schedule, true);
+    }
 }

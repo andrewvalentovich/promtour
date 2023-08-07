@@ -10,152 +10,20 @@
                     <div class="card mt-3 card-default">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <h2 class="m-0">Создание экускурсии</h2>
+                                <h2 class="m-0">Создание записи на экскурсию</h2>
                             </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('admin.companies.excursions.store', $company->id) }}" method="post" enctype="multipart/form-data">
-                                @csrf
+                            <form action="{{ route('admin.users.bookings.excursion.create', $user->id) }}" method="get" enctype="multipart/form-data">
 
                                 <div class="form-group">
-                                    <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Название">
-                                    @error('name')
-                                    <label class="text-danger font-weight-normal" for="name">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea
-                                        name="description"
-                                        id="admin_company_description_create_textarea"
-                                        class="form-control"
-                                        placeholder="Описание"
-                                        cols="30" rows="10"
-                                    >{{ old('description') }}</textarea>
-                                    @error('description')
-                                    <label class="text-danger font-weight-normal" for="description">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" value="{{ old('price') }}" name="price" class="form-control" placeholder="Стоимость билета (rub)">
-                                    @error('price')
-                                    <label class="text-danger font-weight-normal" for="price">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" value="{{ old('max_participants_count_group') }}" name="max_participants_count_group" class="form-control" placeholder="Максимальное количество человек в экскурсионной группе">
-                                    @error('max_participants_count_group')
-                                    <label class="text-danger font-weight-normal" for="max_participants_count_group">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" value="{{ old('max_participants_count_client') }}" name="max_participants_count_client" class="form-control" placeholder="Максимальное количество человек, которое может указать клиент">
-                                    @error('max_participants_count_client')
-                                    <label class="text-danger font-weight-normal" for="max_participants_count_client">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group date">
-                                        <input type="text" id="excursions_create_duration" name="duration" value="{{ old('duration') ?? "00:00:00" }}" class="form-control" placeholder="Продолжительсть экскурсии в формате 00:00:00 (часы:минуты:секунды)"/>
-                                    </div>
-                                    @error('duration')
-                                    <label class="text-danger font-weight-normal" for="duration">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group date">
-                                        <input type="text" id="active_days_for_booking" name="active_days_for_booking" value="{{ old('active_days_for_booking')  }}" class="form-control" placeholder="Количество дней для записи"/>
-                                    </div>
-                                    @error('active_days_for_booking')
-                                    <label class="text-danger font-weight-normal" for="active_days_for_booking">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group date">
-                                        <input type="text" id="excursions_create_days_off" name="days_off" value="{{ old('days_off') }}" class="form-control" placeholder="Выходные дни" autocomplete="off"/>
-                                        <div class="input-group-addon input-group-append">
-                                            <div class="input-group-text">
-                                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @error('days_off')
-                                    <label class="text-danger font-weight-normal" for="days_off">{{ $message }}</label>
-                                    @enderror
-                                </div>
-
-                                <div id="accordion">
-                                    <div class="card card-success">
-                                        <div class="card-header">
-                                            <h4 class="card-title w-100">
-                                                <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
-                                                    Расписание
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <i class="d-block">Введите время начала экскурсий через запятую, например: 10:00, 12:00, 14:00</i>
-                                                <i class="d-block">При этом, если поле оставить пустым, записей в этот день не будет</i>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="monday">Понедельник</label>
-                                                    <input type="text" id="monday" value="{{ old('monday') }}" name="schedule[monday]" class="form-control" placeholder="10:00, 12:00, 16:00">
-                                                    @error('monday')
-                                                        <label class="text-danger font-weight-normal" for="monday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="monday">Вторник</label>
-                                                    <input type="text" id="tuesday" value="{{ old('tuesday') }}" name="schedule[tuesday]" class="form-control" placeholder="10:00">
-                                                    @error('tuesday')
-                                                        <label class="text-danger font-weight-normal" for="tuesday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="wednesday">Среда</label>
-                                                    <input type="text" id="wednesday" value="{{ old('wednesday') }}" name="schedule[wednesday]" class="form-control" placeholder="9:00, 11:00, 15:00">
-                                                    @error('wednesday')
-                                                        <label class="text-danger font-weight-normal" for="wednesday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="thursday">Четверг</label>
-                                                    <input type="text" id="thursday" value="{{ old('thursday') }}" name="schedule[thursday]" class="form-control" placeholder="Пусто (выходной)">
-                                                    @error('thursday')
-                                                        <label class="text-danger font-weight-normal" for="thursday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="friday">Пятница</label>
-                                                    <input type="text" id="friday" value="{{ old('friday') }}" name="schedule[friday]" class="form-control" placeholder="10:00, 12:00, 16:00">
-                                                    @error('friday')
-                                                        <label class="text-danger font-weight-normal" for="friday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="saturday">Суббота</label>
-                                                    <input type="text" id="saturday" value="{{ old('saturday') }}" name="schedule[saturday]" class="form-control" placeholder="12:00, 14:00">
-                                                    @error('saturday')
-                                                        <label class="text-danger font-weight-normal" for="saturday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mt-3">
-                                                    <label class="font-weight-normal" for="sunday">Воскресенье</label>
-                                                    <input type="text" id="sunday" value="{{ old('sunday') }}" name="schedule[sunday]" class="form-control" placeholder="Пусто (выходной)">
-                                                    @error('sunday')
-                                                        <label class="text-danger font-weight-normal" for="sunday">{{ $message }}</label>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <select name="excursion_id" class="form-control select2" style="width: 100%;">
+                                        <option selected="selected">Выберите экскурсию</option>
+                                        @foreach($company->excursions as $excursion)
+                                            <option value="{{ $excursion->id }}">{{ $excursion->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -653,7 +521,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     <script>
         (function($){
-            $('#excursions_create_days_off').datepicker({
+            $('#bookings_create_days_off').datepicker({
                 multidate: true,
                 format: 'dd-mm-yyyy'
             });

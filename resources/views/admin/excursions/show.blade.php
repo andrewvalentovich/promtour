@@ -56,10 +56,10 @@
                                             <td>
                                                 <div class="p-0">
                                                     <table class="table table-hover">
-                                                        <tbody>
-                                                            @foreach($value as $time)
+                                                        <tr>
+                                                            @foreach($value as $item)
                                                                 <tr>
-                                                                    <td>{{ $time }}</td>
+                                                                    <td>{{ isset($item) ? $item : "Пусто (Выходной)" }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-1">
                         <h3 class="text-primary">{{ $excursion->name }}</h3>
-                        <p class="text-muted">
+                        <p class="text-muted" style="white-space: pre-line;">
                             {{ $excursion->description }}
                         </p>
                         <br>
@@ -89,6 +89,9 @@
                             </p>
                             <p class="text-sm">Длительность
                                 <b class="d-block">{{ $excursion->duration }}</b>
+                            </p>
+                            <p class="text-sm">Количество дней для записи
+                                <b class="d-block">{{ $excursion->active_days_for_booking }}</b>
                             </p>
                         </div>
                     </div>
@@ -156,6 +159,10 @@
                 m    = date.getMonth(),
                 y    = date.getFullYear()
 
+            console.log("d = "+d);
+            console.log("m = "+m);
+            console.log("y = "+y);
+
             var Calendar = FullCalendar.Calendar;
 
             var calendarEl = document.getElementById('calendar');
@@ -173,13 +180,6 @@
                 //Random default events
                 events: [
                     {
-                        title          : 'All Day Event',
-                        start          : new Date(y, m, 1),
-                        backgroundColor: '#f56954', //red
-                        borderColor    : '#f56954', //red
-                        allDay         : true
-                    },
-                    {
                         title          : 'Long Event',
                         start          : new Date(y, m, d - 5),
                         end            : new Date(y, m, d - 2),
@@ -188,8 +188,8 @@
                     },
                     {
                         title          : 'Meeting',
-                        start          : new Date(y, m, d, 10, 30),
-                        allDay         : false,
+                        start          : new Date(y, m, d, 9, 0),
+                        end            : new Date(y, m, d, 10, 30),
                         backgroundColor: '#0073b7', //Blue
                         borderColor    : '#0073b7' //Blue
                     },

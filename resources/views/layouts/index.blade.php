@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.bookings.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Бронирования
@@ -120,7 +120,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link">
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Пользователи

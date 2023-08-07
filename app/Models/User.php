@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'phone',
         'password',
+        'role',
     ];
 
     /**
@@ -42,6 +45,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+
+    static function getRoles() {
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_ADMIN => 'Администратор'
+        ];
+    }
+
+    public function getRolesAttribute() {
+        return self::getRoles();
+    }
+
+    public function getRoleNameAttribute() {
+        return self::getRoles()[$this->role];
+    }
+
 
     // Привязка пользователя к бронированиям (один клиент(пользователь) имеет несколько бронирований)
     public function bookings()

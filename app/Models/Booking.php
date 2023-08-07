@@ -9,7 +9,7 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $table = 'excursions';
+    protected $table = 'bookings';
     protected $guarded = [];
     protected $fillable = [];
 
