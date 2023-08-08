@@ -132,100 +132,91 @@
     <script src="{{ asset('adminlte/plugins/fullcalendar/main.js') }}"></script>
 
     <script>
-        $(function () {
+        var calendarData = [];
 
-            /* initialize the external events
-             -----------------------------------------------------------------*/
-            function ini_events(ele) {
-                ele.each(function () {
+        var ajaxfunc = $.ajax({
+            type: "POST",
+            url: `{{ route("admin.excursion.get") }}`,
+            data: { excursion_id: {{ $excursion->id }} },
+            success: function (data) {
+                var res = data;
 
-                    // create an Event Object (https://fullcalendar.io/docs/event-object)
-                    // it doesn't need to have a start or end
-                    var eventObject = {
-                        title: $.trim($(this).text()) // use the element's text as the event title
+                $.each(res, function (index, item) {
+                    calendarData.push({
+                        title: data[index].title,
+                        start: new Date(data[index].start_y, data[index].start_m-1, data[index].start_d, data[index].start_h, data[index].start_i),
+                        end: new Date(data[index].end_y, data[index].end_m-1, data[index].end_d, data[index].end_h, data[index].end_i),
+                        backgroundColor: "#0073b7", // Blue
+                        borderColor: "#0073b7", // Blue
+                    });
+                });
+            },
+        });
+
+        $.when(ajaxfunc).done(function() {  // подождём пока запрос завершится
+            console.log('checkSpaces done!');
+            console.log(calendarData);
+
+            if (calendarData) { // используем переменную
+                $(function () {
+                    /* initialize the external events
+                     -----------------------------------------------------------------*/
+                    function ini_events(ele) {
+                        ele.each(function () {
+
+                            // create an Event Object (https://fullcalendar.io/docs/event-object)
+                            // it doesn't need to have a start or end
+                            var eventObject = {
+                                title: $.trim($(this).text()) // use the element's text as the event title
+                            }
+
+                            // store the Event Object in the DOM element so we can get to it later
+                            $(this).data('eventObject', eventObject)
+
+                        })
                     }
 
-                    // store the Event Object in the DOM element so we can get to it later
-                    $(this).data('eventObject', eventObject)
+                    /* initialize the calendar
+                     -----------------------------------------------------------------*/
+                    //Date for the calendar events (dummy data)
+                    var date = new Date()
+                    var d    = date.getDate(),
+                        m    = date.getMonth(),
+                        y    = date.getFullYear()
 
+                    console.log("d = "+d);
+                    console.log("m = "+m);
+                    console.log("y = "+y);
+                    console.log(new Date(y, m, d));
+
+                    var Calendar = FullCalendar.Calendar;
+
+                    var calendarEl = document.getElementById('calendar');
+
+                    // initialize the external events
+                    // -----------------------------------------------------------------
+
+                    var calendar = new Calendar(calendarEl, {
+                        headerToolbar: {
+                            left  : 'prev,next today',
+                            center: 'title',
+                            right : 'dayGridMonth,timeGridWeek,timeGridDay'
+                        },
+                        themeSystem: 'bootstrap',
+                        //Random default events
+                        events: calendarData,
+                        editable  : false,
+                        droppable : false, // this allows things to be dropped onto the calendar !!!
+                    });
+
+                    calendar.render();
+                    // $('#calendar').fullCalendar()
+
+                    /* ADDING EVENTS */
                 })
             }
+        });
 
-            /* initialize the calendar
-             -----------------------------------------------------------------*/
-            //Date for the calendar events (dummy data)
-            var date = new Date()
-            var d    = date.getDate(),
-                m    = date.getMonth(),
-                y    = date.getFullYear()
 
-            console.log("d = "+d);
-            console.log("m = "+m);
-            console.log("y = "+y);
-
-            var Calendar = FullCalendar.Calendar;
-
-            var calendarEl = document.getElementById('calendar');
-
-            // initialize the external events
-            // -----------------------------------------------------------------
-
-            var calendar = new Calendar(calendarEl, {
-                headerToolbar: {
-                    left  : 'prev,next today',
-                    center: 'title',
-                    right : 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                themeSystem: 'bootstrap',
-                //Random default events
-                events: [
-                    {
-                        title          : 'Long Event',
-                        start          : new Date(y, m, d - 5),
-                        end            : new Date(y, m, d - 2),
-                        backgroundColor: '#f39c12', //yellow
-                        borderColor    : '#f39c12' //yellow
-                    },
-                    {
-                        title          : 'Meeting',
-                        start          : new Date(y, m, d, 9, 0),
-                        end            : new Date(y, m, d, 10, 30),
-                        backgroundColor: '#0073b7', //Blue
-                        borderColor    : '#0073b7' //Blue
-                    },
-                    {
-                        title          : 'Lunch',
-                        start          : new Date(y, m, d, 12, 0),
-                        end            : new Date(y, m, d, 14, 0),
-                        allDay         : false,
-                        backgroundColor: '#00c0ef', //Info (aqua)
-                        borderColor    : '#00c0ef' //Info (aqua)
-                    },
-                    {
-                        title          : 'Birthday Party',
-                        start          : new Date(y, m, d + 1, 19, 0),
-                        end            : new Date(y, m, d + 1, 22, 30),
-                        allDay         : false,
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor    : '#00a65a' //Success (green)
-                    },
-                    {
-                        title          : 'Click for Google',
-                        start          : new Date(y, m, 28),
-                        end            : new Date(y, m, 29),
-                        url            : 'https://www.google.com/',
-                        backgroundColor: '#3c8dbc', //Primary (light-blue)
-                        borderColor    : '#3c8dbc' //Primary (light-blue)
-                    }
-                ],
-                editable  : false,
-                droppable : false, // this allows things to be dropped onto the calendar !!!
-            });
-
-            calendar.render();
-            // $('#calendar').fullCalendar()
-
-            /* ADDING EVENTS */
-        })
     </script>
 @endsection

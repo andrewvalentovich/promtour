@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'booking_date' => 'required|string|max:10',
             'booking_time' => 'required|string|max:8',
-            'participants_count' => 'required|integer|max:3',
+            'participants_count' => 'required|integer|max:100',
             'user_id' => 'required|integer',
             'excursion_id' => 'required|integer',
         ];
