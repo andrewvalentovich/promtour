@@ -16,9 +16,7 @@ class ExcursionController extends Controller
     public function admin(ExcursionRequest $request)
     {
         $data = $request->validated();
-        $excursion = Excursion::find($data['excursion_id'])->whereHas('bookings', function($query) {
-            $query->where('booking_date', '>=', date(now()));
-        })->get()[0];
+        $excursion = Excursion::find($data['excursion_id']);
 
         $return_arr = [];
 

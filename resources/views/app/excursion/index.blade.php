@@ -79,7 +79,7 @@
             </div>
             <div class="catalog__list excursion__card-list">
                 @foreach($excursions as $excursion)
-                    <div class="excursion__card">
+                    <div  class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
                                 <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
