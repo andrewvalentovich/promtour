@@ -6,3 +6,33 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Styles
+@import 'style';
+@import 'theme';
+@import 'components/about';
+@import 'components/auth';
+@import 'components/catalog';
+@import 'components/company';
+@import 'components/enroll';
+@import 'components/enterprises';
+@import 'components/excursion';
+@import 'components/excursion-card';
+@import 'components/excursions';
+@import 'components/gallery';
+@import 'components/navigation';
+@import 'components/preview';
+@import 'components/profile';
+@import 'components/sort';
+
+// UI
+@import 'components/UI/input';
+@import 'components/UI/popup';
+
+// layout
+@import 'layout/footer';
+@import 'layout/header';
+
+// fonts
+@import 'fonts';
+

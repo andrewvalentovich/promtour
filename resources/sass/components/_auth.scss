@@ -1,0 +1,118 @@
+.main-auth {
+    background: url('../img/icons/auth-bg.svg') 0 0 no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.auth {
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+    @media (max-width: 767px) {
+        padding-top: 45px;
+        padding-bottom: 50px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    &__content {
+        border-radius: 29px;
+        background: #FFF;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 16px 17px 57px;
+        @media (max-width: 767px) {
+            border-radius: 20px;
+            padding: 16px 17px 40px;
+        }
+    }
+
+    &__top {
+        color: rgba(25, 101, 124, 0.80);
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 37px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: flex-end;
+        @media (max-width: 539px) {
+            font-size: 10px;
+            font-weight: 500;
+            gap: 7px;
+            margin-bottom: 16px;
+        }
+    }
+
+    &__top-btn {
+        padding: 5px 19px;
+        @media (max-width: 539px) {
+            padding: 5px 14px;
+        }
+    }
+
+    &__title {
+        color: #19657C;
+        font-family: Rubik One;
+        font-size: 38.811px;
+        font-weight: 400;
+        margin-bottom: 33px;
+        text-align: center;
+        @media (max-width: 539px) {
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+    }
+    & .popup__label-list-item {
+        max-width: 326px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    & .popup__label-list-item:not(:last-child) {
+        margin-bottom: 15px;
+        @media (max-width: 539px) {
+            margin-bottom: 10px;
+        }
+    }
+    & .popup__label-list {
+        padding-bottom: 15px;
+        @media (max-width: 539px) {
+            padding-bottom: 20px;
+        }
+    }
+    &__btn {
+        margin: 0 auto;
+        color: #FFF;
+        font-family: Rubik One;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 16px 38px;
+        @media (max-width: 539px) {
+            padding: 11px 30px;
+            font-size: 13.601px;
+            margin: 0 auto 25px;
+        }
+    }
+
+    &__ways {
+        display: flex;
+        gap: 15.5px;
+        justify-content: center;
+    }
+
+    &__ways-item {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        & svg {
+            width: 16px;
+        }
+    }
+    
+    &__btn {
+
+    }
+}
+

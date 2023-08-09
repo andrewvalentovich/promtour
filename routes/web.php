@@ -14,12 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->name('index');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Профиль
+Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+});
+
+Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
+Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/excursions', [App\Http\Controllers\ExcursionController::class, 'index'])->name('excursions.index');
+
 // Админка
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::group(['as' => 'admin.'], function() {
