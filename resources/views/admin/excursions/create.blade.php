@@ -19,6 +19,7 @@
                                 @csrf
 
                                 <div class="form-group">
+                                    <label for="">Название</label>
                                     <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Название">
                                     @error('name')
                                     <label class="text-danger font-weight-normal" for="name">{{ $message }}</label>
@@ -26,6 +27,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Описание</label>
                                     <textarea
                                         name="description"
                                         id="admin_company_description_create_textarea"
@@ -39,6 +41,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Стоимость билета (rub)</label>
                                     <input type="text" value="{{ old('price') }}" name="price" class="form-control" placeholder="Стоимость билета (rub)">
                                     @error('price')
                                     <label class="text-danger font-weight-normal" for="price">{{ $message }}</label>
@@ -46,6 +49,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Максимальное количество человек в экскурсионной группе</label>
                                     <input type="text" value="{{ old('max_participants_count_group') }}" name="max_participants_count_group" class="form-control" placeholder="Максимальное количество человек в экскурсионной группе">
                                     @error('max_participants_count_group')
                                     <label class="text-danger font-weight-normal" for="max_participants_count_group">{{ $message }}</label>
@@ -53,6 +57,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Максимальное количество человек, которое может указать клиент</label>
                                     <input type="text" value="{{ old('max_participants_count_client') }}" name="max_participants_count_client" class="form-control" placeholder="Максимальное количество человек, которое может указать клиент">
                                     @error('max_participants_count_client')
                                     <label class="text-danger font-weight-normal" for="max_participants_count_client">{{ $message }}</label>
@@ -60,8 +65,17 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Возрастное ограничение</label>
+                                    <input type="text" value="{{ old('age_limit') }}" name="age_limit" class="form-control" placeholder="Возрастное ограничение">
+                                    @error('age_limit')
+                                    <label class="text-danger font-weight-normal" for="age_limit">{{ $message }}</label>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Продолжительсть экскурсии в формате 00:00:00 (часы:минуты:секунды)</label>
                                     <div class="input-group date">
-                                        <input type="text" id="excursions_create_duration" name="duration" value="{{ old('duration') ?? "00:00:00" }}" class="form-control" placeholder="Продолжительсть экскурсии в формате 00:00:00 (часы:минуты:секунды)"/>
+                                        <input type="text" id="excursions_create_duration" name="duration" value="{{ old('duration') ?? "00:00:00" }}" class="form-control"/>
                                     </div>
                                     @error('duration')
                                     <label class="text-danger font-weight-normal" for="duration">{{ $message }}</label>
@@ -69,6 +83,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Количество дней для записи</label>
                                     <div class="input-group date">
                                         <input type="text" id="active_days_for_booking" name="active_days_for_booking" value="{{ old('active_days_for_booking')  }}" class="form-control" placeholder="Количество дней для записи"/>
                                     </div>
@@ -78,6 +93,7 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Выходные дни</label>
                                     <div class="input-group date">
                                         <input type="text" id="excursions_create_days_off" name="days_off" value="{{ old('days_off') }}" class="form-control" placeholder="Выходные дни" autocomplete="off"/>
                                         <div class="input-group-addon input-group-append">

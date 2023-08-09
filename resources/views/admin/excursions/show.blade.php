@@ -93,6 +93,9 @@
                             <p class="text-sm">Количество дней для записи
                                 <b class="d-block">{{ $excursion->active_days_for_booking }}</b>
                             </p>
+                            <p class="text-sm">Возрастное ограничение
+                                <b class="d-block">{{ $excursion->age_limit }}</b>
+                            </p>
                         </div>
                     </div>
                 </div>

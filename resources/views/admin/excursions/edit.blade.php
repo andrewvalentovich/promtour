@@ -77,6 +77,14 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Возрастное ограничение</label>
+                                    <input type="text" value="{{ old('age_limit') ?? $excursion->age_limit }}" name="age_limit" class="form-control" placeholder="Возрастное ограничение">
+                                    @error('age_limit')
+                                    <label class="text-danger font-weight-normal" for="age_limit">{{ $message }}</label>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <div class="input-group date">
                                         <input type="text" id="excursions_create_duration" name="duration" value="{{ old('duration') ?? $excursion->duration }}" class="form-control" placeholder="Продолжительсть экскурсии в минутах"/>
                                     </div>
