@@ -89,6 +89,9 @@
         padding: 8px 12px 6px;
     }
 }
+input[disabled] {
+    background: transparent;
+}
 input[type="date"] {
     position: relative;
 }
@@ -129,5 +132,14 @@ input[type="date"]::-webkit-clear-button {
         padding-top: 19px;
         padding-left: 11px;
         background: transparent;
+    }
+}
+
+.dropdown-time {
+    & .dropdown-input__item {
+        display: none;
+    }
+    & .dropdown-input__item.active {
+        display: block;
     }
 }

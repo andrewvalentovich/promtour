@@ -276,7 +276,9 @@ if(document.querySelectorAll('.dropdown-input').length) {
         parentBlock.addEventListener('click', function(e) {
             const target = e.target
             e.preventDefault()
-
+            if(parentBlock.getAttribute('disabled') === 'true') {
+                return
+            }
             if(target.classList.contains('dropdown-input__title') || target.closest('.dropdown-input__title')) {
                 parentBlock.classList.toggle('active')
                 return
@@ -370,8 +372,9 @@ if(document.querySelectorAll('.header-m').length) {
     hedearMobileSwipeClose()
 }
 
-
+let eventInfo = []
 async function getExcursion(id) {
+    eventInfo.length = 0
     await $.ajax({
         url: '/api/excursion/schedule/',         /* Куда отправить запрос */
         method: 'post',             /* Метод запроса (post или get) */
@@ -379,7 +382,9 @@ async function getExcursion(id) {
         data: {excursion_id: id},     /* Данные передаваемые в массиве */
         success: function(data){   /* функция которая будет выполнена после успешного запроса.  */
            console.log(data); /* В переменной data содержится ответ от index.php. */
+           eventInfo = [...data]
            setInfoRecordPopup(data)
+           disableLoader($('.popup-record'))
         }
     });
 }
@@ -387,8 +392,30 @@ async function getExcursion(id) {
 function setInfoRecordPopup(data) {
     const popupRecord = document.querySelector('.popup-record')
     const excursionName = popupRecord.querySelector('.popup__title')
-    excursionName.innerHTML = data[0]
+    const timeBlock = popupRecord.querySelector('.dropdown-time')
+    const timeBlockList = popupRecord.querySelector('.dropdown-input__list')
+
+
+    //название мероприятия
+    excursionName.innerHTML = data[0].name
     setAvailableDates(data)
+
+    timeBlockList.innerHTML = ''
+    eventInfo[1].forEach(el => {
+        let div = document.createElement('div')
+        div.classList.add('dropdown-input__item')
+        div.setAttribute('date', el.date)
+        div.setAttribute('time', el.time)
+
+        let span = document.createElement('span')
+        span.classList.add('text')
+
+        span.innerHTML = el.time
+
+        div.appendChild(span)
+
+        timeBlockList.appendChild(div)
+    });
 }
 
 // открытие попапа записаться
@@ -400,8 +427,21 @@ if(document.querySelectorAll('.open-choice').length) {
             const id = btn.closest('.excursion__card').getAttribute('data_id')
             getExcursion(id)
             popupRecord.classList.add('active')
+            if(popupRecord.getAttribute('event-data_id') !== id) {
+                clearDataPopup(popupRecord)
+            }
+            popupRecord.setAttribute('event-data_id',id)
         })
     });
+}
+
+//убрать прелоудер и покзать контент в попапе
+function disableLoader(popup) {
+    const $popup = $(popup);
+    const $loader = $popup.find('.lds-spinner');
+    const $content = $popup.find('.popup__content');
+    $loader.removeClass('active');
+    $content.addClass('active');
 }
 
 //массив с доступными датами для календаря
@@ -412,7 +452,41 @@ function setAvailableDates(data) {
     datesInfo.forEach(el => {
         availableDates.push(el.date)
     });
-    console.log(availableDates)
+}
+
+//функция для добавления времени на выбранную дату
+function setTimeOfCurrentDate(currentDate) {
+    const timeBlock = document.querySelector('.dropdown-time')
+    const input = timeBlock.querySelector('input')
+    input.value = ''
+    let availableTimes = [];
+
+    //убираем disabled
+    timeBlock.setAttribute('disabled', 'false')
+
+    const dropdownTimeItems = document.querySelectorAll('.dropdown-input__item') 
+    dropdownTimeItems.forEach(el => {
+        if(el.getAttribute('date') === currentDate) {
+            el.classList.add('active')
+        } else [
+            el.classList.remove('active')
+        ]
+    });
+}
+
+function clearDataPopup(popup) {
+    const $popup = $(popup);
+    const $loader = $popup.find('.lds-spinner');
+    const $content = $popup.find('.popup__content');
+    const $datepicker = $popup.find('#datepicker');
+    const $time = $popup.find('#time');
+
+
+    $loader.addClass('active');
+    $content.removeClass('active');
+
+    $time.val('')
+    $datepicker.val('')
 }
 
 //календарь 
@@ -440,6 +514,7 @@ $.datepicker.setDefaults($.datepicker.regional['ru']);
 $(function(){
 	$("#datepicker").datepicker({
         onSelect: function(date){
+            setTimeOfCurrentDate(date)
         },
         beforeShowDay: function(date){
 			var string = jQuery.datepicker.formatDate('dd.mm.yy', date);

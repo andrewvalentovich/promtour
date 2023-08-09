@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card">
+                            <div class="excursion__card" data_id='2'>
                                 <div class="excursion__card-top">
                                     <div class="excursion__card-pic">
                                         <img src="{{ Vite::asset('resources/images/pic/card-2.png') }}" alt="вкусные тайны">

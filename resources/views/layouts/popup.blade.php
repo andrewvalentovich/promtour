@@ -1,4 +1,4 @@
-<form class="popup popup-record ">
+<form class="popup popup-record">
     <div class="popup__body">
         <div class="popup__content">
             <div class="popup__title">
@@ -15,21 +15,17 @@
                     <span>
                         Дата
                     </span>
-                    <!-- <input id="datepicker_value"> -->
                     <input type="text" id="datepicker">
-                    <div class="datepicker-w">
-                        <!-- <div id="datepicker"></div> -->
-                    </div>
                 </label>
-                <label class="popup__label-list-item dropdown-input">
+                <label class="popup__label-list-item dropdown-input dropdown-time" disabled="true">
                     <div class="dropdown-input__title">
                         <span>
                             Время
                         </span>
-                        <input readonly>
+                        <input readonly id="time">
                     </div>
                     <div class="dropdown-input__list">
-                        <div class="dropdown-input__item">
+                        <!-- <div class="dropdown-input__item">
                             <span class="text">
                                 в 16:00, 2 часа
                             </span>
@@ -58,7 +54,7 @@
                             <span class="text">
                                 в 16:00, 6 часа
                             </span>
-                        </div>
+                        </div> -->
                     </div>
                 </label>
                 <div class="number-seats">
@@ -91,5 +87,7 @@
 
             </div>
         </div>
+        <!-- loader -->
+        <div class="lds-spinner active"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
 </form>

@@ -208,3 +208,13 @@
     }
 }
 
+.popup-record {
+    & .popup__content {
+        display: none;
+    }
+    & .popup__content {
+        &.active {
+            display: block;
+        }
+    }
+}
