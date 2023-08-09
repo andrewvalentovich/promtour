@@ -19,6 +19,7 @@ class ExcursionController extends Controller
         $excursion = Excursion::find($data['excursion_id']);
 
         $return_arr = [];
+        $return_data['info'] = ['name' => $excursion->name];
 
         for($i = 0; $i <= $excursion->active_days_for_booking; $i++) {
 
@@ -35,7 +36,7 @@ class ExcursionController extends Controller
                     $participants_count += $booking->participants_count;
                 }
 
-                $return_arr[] = [
+                $return_data['booking'][] = [
                     "date" => date("d.m.Y", strtotime(now()) + 86400 * $i),
                     "time" => $value,
                     "max_participants_count" => $excursion->max_participants_count_group,
@@ -44,6 +45,7 @@ class ExcursionController extends Controller
             }
         }
 
-        return response()->json(array_values($return_arr));
+
+        return response()->json(array_values($return_data));
     }
 }
