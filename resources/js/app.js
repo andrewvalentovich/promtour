@@ -5,7 +5,9 @@ import.meta.glob([
 
 import './bootstrap';
 import './jquery';
-import './bodyScrollLock.min.js';
+import './jquery-1.12.4'
+import './jquery-ui'
+// import './bodyScrollLock.min.js';
 
 
 function changerActive(list) {
@@ -106,17 +108,7 @@ const companySwiper = new Swiper('.company__swiper', {
     }
 });
 
-// открытие попапа записаться
-if(document.querySelectorAll('.open-choice').length) {
-    const excursionCardBtn = document.querySelectorAll('.open-choice')
-    const popupRecord = document.querySelector('.popup-record')
-    excursionCardBtn.forEach(btn => {
-        btn.addEventListener('click', function() {
-            popupRecord.classList.add('active')
-            bodyScrollLock.disableBodyScroll(popupRecord)
-        })
-    });
-}
+
 
 
 // показать скрыть пароль
@@ -378,19 +370,82 @@ if(document.querySelectorAll('.header-m').length) {
     hedearMobileSwipeClose()
 }
 
-const swipers = document.querySelectorAll('.mySwiper ')
 
-swipers.forEach(swiper => {
-    addNumberPhoto(swiper)
-});
-
-function addNumberPhoto(swiper) {
-    const slides = swiper.querySelectorAll('.swiper-slide')
-    const newDiv = document.createElement("div");
-    newDiv.classList.add('slide__number')
-
-    slides.forEach((slide,index) => {
-        newDiv.innerHTML = index
-        slide.appendChild(newDiv)
+async function getExcursion(id) {
+    await $.ajax({
+        url: '/api/excursion/schedule/',         /* Куда отправить запрос */
+        method: 'post',             /* Метод запроса (post или get) */
+        dataType: 'json',          /* Тип данных в ответе (xml, json, script, html). */
+        data: {excursion_id: id},     /* Данные передаваемые в массиве */
+        success: function(data){   /* функция которая будет выполнена после успешного запроса.  */
+           console.log(data); /* В переменной data содержится ответ от index.php. */
+           setInfoRecordPopup(data)
+        }
     });
 }
+
+function setInfoRecordPopup(data) {
+    const popupRecord = document.querySelector('.popup-record')
+    const excursionName = popupRecord.querySelector('.popup__title')
+    excursionName.innerHTML = data[0]
+    setAvailableDates(data)
+}
+
+// открытие попапа записаться
+if(document.querySelectorAll('.open-choice').length) {
+    const excursionCardBtn = document.querySelectorAll('.open-choice')
+    const popupRecord = document.querySelector('.popup-record')
+    excursionCardBtn.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = btn.closest('.excursion__card').getAttribute('data_id')
+            getExcursion(id)
+            popupRecord.classList.add('active')
+        })
+    });
+}
+
+//массив с доступными датами для календаря
+let availableDates = [];
+function setAvailableDates(data) {
+    const datesInfo = [...data[1]]
+    availableDates.length = 0
+    datesInfo.forEach(el => {
+        availableDates.push(el.date)
+    });
+    console.log(availableDates)
+}
+
+//календарь 
+/* Локализация datepicker */
+$.datepicker.regional['ru'] = {
+	closeText: 'Закрыть',
+	prevText: 'Предыдущий',
+	nextText: 'Следующий',
+	currentText: 'Сегодня',
+	monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+	dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+	dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+	dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+	weekHeader: 'Не',
+	dateFormat: 'dd.mm.yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['ru']);
+
+
+$(function(){
+	$("#datepicker").datepicker({
+        onSelect: function(date){
+        },
+        beforeShowDay: function(date){
+			var string = jQuery.datepicker.formatDate('dd.mm.yy', date);
+			return [availableDates.indexOf(string) !== -1];
+		},
+    });
+
+});
+

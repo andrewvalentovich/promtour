@@ -1,4 +1,4 @@
-<form class="popup popup-record">
+<form class="popup popup-record ">
     <div class="popup__body">
         <div class="popup__content">
             <div class="popup__title">
@@ -15,7 +15,11 @@
                     <span>
                         Дата
                     </span>
-                    <input type="date">
+                    <!-- <input id="datepicker_value"> -->
+                    <input type="text" id="datepicker">
+                    <div class="datepicker-w">
+                        <!-- <div id="datepicker"></div> -->
+                    </div>
                 </label>
                 <label class="popup__label-list-item dropdown-input">
                     <div class="dropdown-input__title">
