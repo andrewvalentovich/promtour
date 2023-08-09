@@ -82,48 +82,25 @@
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
-                            </div>
-                            <div class="excursion__card-hashtags">
-                                <div class="excursion__card-hashtag">
-                                    <span>
-                                        {{ $excursion->age_limit }}+
-                                    </span>
-                                </div>
-                                <div class="excursion__card-hashtag _green">
-                                    <div class="excursion__card-hashtag-icon">
-                                        <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                    </div>
-                                    <span>
-                                        {{ (int) $excursion->duration }} ч
-                                    </span>
-                                </div>
-                                <div class="excursion__card-hashtag _yellow">
-                                    <div class="excursion__card-hashtag-icon">
-                                        <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                    </div>
-                                    <span>
-                                        0 - {{ $excursion->max_participants_count_group }} чел
-                                    </span>
-                                </div>
+                                <img src="{{ $company->photos[0]->photo_url }}" alt="вкусные тайны">
                             </div>
                         </div>
                         <div class="excursion__card-text">
                             <div class="excursion__card-desc">
                                 <h3>
-                                    {{ $excursion->name }}
+                                    {{ $company->name }}
                                 </h3>
                                 <p class="excursion__card-lead">
-                                    {{ Str::limit($excursion->description, 80) }}
+                                    {{ Str::limit($company->description, 80) }}
                                 </p>
                             </div>
                             <div class="excursion__card-btns">
-                                <a href="#" class="excursion__card-btn btn btn_blue">
+                                <a href="{{ route('company.detail', $company->slug) }}" class="excursion__card-btn btn btn_blue">
                                     Подробнее
                                 </a>
-                                <button class="excursion__card-btn btn btn_green open-choice">
+                                <a href="{{ route('company.excursions', $company->slug) }}" class="excursion__card-btn btn btn_green">
                                     Выбрать тур
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

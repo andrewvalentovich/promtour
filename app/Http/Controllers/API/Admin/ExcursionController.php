@@ -13,7 +13,7 @@ class ExcursionController extends Controller
     /**
      * Listing of the resource.
      */
-    public function __invoke(ExcursionRequest $request)
+    public function admin(ExcursionRequest $request)
     {
         $data = $request->validated();
         $excursion = Excursion::find($data['excursion_id']);

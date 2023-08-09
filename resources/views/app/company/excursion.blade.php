@@ -3,7 +3,7 @@
     <main>
         <div class="catalog container">
             <div class="navigation">
-                <a class="navigation__item" href="/">
+                <a class="navigation__item" href="#">
                     Главная
                 </a>
                 <a class="navigation__item" href="#">
@@ -19,66 +19,16 @@
                     Экскурсии
                 </a>
             </div>
-            <div class="catalog__sort">
-                <div class="sort close-out">
-                    <button class="sort__title btn btn_green catalog__title_green">
-							<span>
-								Отрасль
-							</span>
-                        <picture>
-                            <source media="(max-width: 539px)" srcset="{{ Vite::asset('resources/images/icons/arrow-white_mob.svg') }}">
-                            <img class="arrow" src="{{ Vite::asset('resources/images/icons/arrow-white.svg') }}" alt="стрелочка">
-                        </picture>
-                    </button>
-                    <div class="sort__list">
-                        <div class="sort__list-item">
-								<span>
-									Отрасль1
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль2
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль3
-								</span>
-                        </div>
-                    </div>
+            <div class="excursions__top">
+                <div class="excursions__title title">
+                    Экохимия
                 </div>
-                <div class="sort close-out">
-                    <button class="sort__title btn btn_blue-dark catalog__title_blue-dark">
-							<span>
-								Предприятия
-							</span>
-                        <picture>
-                            <source media="(max-width: 539px)" srcset="{{ Vite::asset('resources/images/icons/arrow-white_mob.svg') }}">
-                            <img class="arrow" src="{{ Vite::asset('resources/images/icons/arrow-white.svg') }}" alt="стрелочка">
-                        </picture>
-                    </button>
-                    <div class="sort__list">
-                        <div class="sort__list-item">
-								<span>
-								Предприятия1
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Предприятия2
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Предприятия3
-								</span>
-                        </div>
-                    </div>
-                </div>
+                <span class="btn btn_blue">
+						Промышленность
+					</span>
             </div>
             <div class="catalog__list excursion__card-list">
-                @foreach($companies as $company)
+                @foreach($excursions as $excursion)
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
@@ -87,7 +37,7 @@
                             <div class="excursion__card-hashtags">
                                 <div class="excursion__card-hashtag">
                                     <span>
-                                        {{ $excursion->age_limit }}+
+                                        {{ $excursion->age_limit }}
                                     </span>
                                 </div>
                                 <div class="excursion__card-hashtag _green">
@@ -114,11 +64,11 @@
                                     {{ $excursion->name }}
                                 </h3>
                                 <p class="excursion__card-lead">
-                                    {{ Str::limit($excursion->description, 80) }}
+                                    {{ Str::limit($excursion->description, 40) }}
                                 </p>
                             </div>
                             <div class="excursion__card-btns">
-                                <a href="#" class="excursion__card-btn btn btn_blue">
+                                <a href="{{ route('excursion.detail', $excursion->slug) }}" class="excursion__card-btn btn btn_blue">
                                     Подробнее
                                 </a>
                                 <button class="excursion__card-btn btn btn_green open-choice">

@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="catalog__list excursion__card-list">
-                @foreach($companies as $company)
+                @foreach($excursions as $excursion)
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
@@ -118,7 +118,7 @@
                                 </p>
                             </div>
                             <div class="excursion__card-btns">
-                                <a href="#" class="excursion__card-btn btn btn_blue">
+                                <a href="{{ route('excursion.detail', $excursion->slug) }}" class="excursion__card-btn btn btn_blue">
                                     Подробнее
                                 </a>
                                 <button class="excursion__card-btn btn btn_green open-choice">

@@ -26,7 +26,19 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
     Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
 });
 
-Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
+// Страницы компаний
+Route::group(['prefix' => 'company'], function () {
+    Route::get('/catalog', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
+    Route::get('/{slug}', [App\Http\Controllers\CompanyController::class, 'detail'])->name('company.detail');
+    Route::get('/{slug}/excursions', [App\Http\Controllers\CompanyController::class, 'excursions'])->name('company.excursions');
+});
+
+// Страницы экскурсий
+Route::group(['prefix' => 'excursion'], function () {
+    Route::get('/catalog', [App\Http\Controllers\ExcursionController::class, 'index'])->name('excursion.index');
+    Route::get('/{slug}', [App\Http\Controllers\ExcursionController::class, 'detail'])->name('excursion.detail');
+});
+
 Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index'])->name('catalog.index');
 Route::get('/excursions', [App\Http\Controllers\ExcursionController::class, 'index'])->name('excursions.index');
 

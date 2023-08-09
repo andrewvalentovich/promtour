@@ -20,14 +20,14 @@
             <div class="company__text">
                 <div class="excursions__top">
                     <div class="excursions__title title">
-                        Экохимия
+                        {{ $company->name }}
                     </div>
                     <span class="btn btn_blue">
                         Промышленность
                     </span>
                 </div>
                 <p class="company__text-lead">
-                    Экохимия - ведущий химический завод, специализирующийся на производстве инновационных химических решений для различных отраслей промышленности. Наша компания собирает лучших специалистов и экспертов в области химии, чтобы разрабатывать продукты и технологии, способствующие устойчивому развитию и заботе о окружающей среде. С момента своего основания, Экохимия стремится к инновациям, постоянно внедряя передовые и экологически безопасные методы производства. Наши продукты применяются в различных отраслях, таких как сельское хозяйство, строительство, текстильная промышленность, а также в производстве бытовой и промышленной химии.
+                    {{ $company->description }}
                 </p>
                 <div class="company__swiper-btns">
                     <div class="company__prev company__swiper-btn">
@@ -60,30 +60,30 @@
                     </div>
                 </div>
                 <div class="company__pagination swiper-pagination"></div>
-                <button class="company__text-btn btn btn_green">
+                <a href="{{ route('company.excursions', $company->slug) }}" class="company__text-btn btn btn_green">
                     Смотреть экскурсии
-                </button>
+                </a>
             </div>
             <div class="company__side">
                 <div class="company__side-preview open-gallery">
-                    <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
+                    <img src="{{ asset($company->photos[0]->photo_url) }}" alt="фото компании">
                 </div>
                 <div class="company__side-list">
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        <span>
-									12+ фото
-								</span>
-                    </div>
+                    @foreach($company->photos as $photo)
+                        @if($loop->index == 3)
+                            <div class="company__side-item open-gallery">
+                                <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                    <span>
+                                    {{ count($company->photos) - 4 }}+ фото
+                                </span>
+                            </div>
+                            @break
+                        @else
+                            <div class="company__side-item open-gallery">
+                                <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -93,12 +93,11 @@
         <div class="gallery__content">
             <div class="gallery__swiper">
                 <div class="gallery__swiper-list">
-                    <div class="gallery__swiper-slide swiper-slide active">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
+                    @foreach($company->photos as $photo)
+                    <div class="gallery__swiper-slide swiper-slide {{ $loop->index == 0 ? "active" : "" }}">
+                        <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
                     </div>
-                    <div class="gallery__swiper-slide swiper-slide">
-                        <img src="{{ Vite::asset('resources/images/pic/gallery-1.png') }}" alt="фото компании">
-                    </div>
+                    @endforeach
                 </div>
                 <div class="gallery__swiper-prev gallery__swiper-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="27" viewBox="0 0 48 27" fill="none"><script xmlns=""/>
@@ -112,12 +111,11 @@
                 </div>
             </div>
             <div class="gallery__list">
+                @foreach($company->photos as $photo)
                 <div class="gallery__list-item">
-                    <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
+                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
                 </div>
-                <div class="gallery__list-item">
-                    <img src="{{ Vite::asset('resources/images/pic/gallery-1.png') }}" alt="фото компании">
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="gallery__close close popup-close">

@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
-    Route::post('excursion/schedule/', \App\Http\Controllers\API\Admin\ExcursionController::class)->name('excursion.get');
+    Route::post('excursion/schedule/', [\App\Http\Controllers\API\Admin\ExcursionController::class, 'admin'])->name('excursion.get');
 });
+
+Route::post('excursion/schedule/', [\App\Http\Controllers\API\ExcursionController::class, 'admin'])->name('excursion.get');

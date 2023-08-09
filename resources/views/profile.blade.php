@@ -11,7 +11,7 @@
                     </div>
                     <div class="profile__me-data">
                         <div class="profile__me-name">
-                            Мария Светлова
+                            {{ auth()->user()->name }}
                         </div>
                         <div class="profile__me-list">
                             <div class="profile__me-list-item">
@@ -19,32 +19,32 @@
                                     <img src="{{ Vite::asset('resources/images/icons/point-me.svg') }}" alt="точка на карте">
                                 </div>
                                 <span>
-											Ярославль
-										</span>
+                                    Ярославль
+                                </span>
                             </div>
                             <div class="profile__me-list-item">
                                 <div class="icon">
                                     <img src="{{ Vite::asset('resources/images/icons/phone-call.svg') }}" alt="телефон">
                                 </div>
                                 <span>
-											Телефон подтвержден
-										</span>
+                                    Телефон подтвержден
+                                </span>
                             </div>
                             <div class="profile__me-list-item">
                                 <div class="icon">
                                     <img src="{{ Vite::asset('resources/images/icons/clock 1.svg') }}" alt="часы">
                                 </div>
                                 <span>
-											На сайте с 28.05.2023
-										</span>
+                                    На сайте с {{ date("d.m.Y", strtotime(auth()->user()->created_at)) }}
+                                </span>
                             </div>
                             <div class="profile__me-list-item">
                                 <div class="icon">
                                     <img src="{{ Vite::asset('resources/images/icons/Ellipse 5.svg') }}" alt="статус">
                                 </div>
                                 <span>
-											Онлайн
-										</span>
+                                    Онлайн
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -106,6 +106,7 @@
                     </div>
                 </div>
                 <div class="profile__events-list">
+                    @foreach($bookings as $booking)
                     <div class="profile__events-item">
                         <div class="profile__events-item-side">
                             <div class="profile__events-item-pic">
@@ -113,38 +114,38 @@
                             </div>
                             <div class="profile__events-item-text">
                                 <div class="profile__events-item-name">
-                                    Кузница "Зов Огня и Металла”
+                                    {{ $booking->excursion->name }}
                                 </div>
                                 <div class="excursion__card-hashtags">
                                     <div class="excursion__card-hashtag">
-												<span>
-													12+
-												</span>
+                                        <span>
+                                            {{ $booking->excursion->age_limit }}+
+                                        </span>
                                     </div>
                                     <div class="excursion__card-hashtag _green">
                                         <div class="excursion__card-hashtag-icon">
                                             <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
                                         </div>
                                         <span>
-													2 ч
-												</span>
+                                            {{ (int) date("H", strtotime($booking->excursion->duration)) }} ч
+                                        </span>
                                     </div>
                                     <div class="excursion__card-hashtag _yellow">
                                         <div class="excursion__card-hashtag-icon">
                                             <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
                                         </div>
                                         <span>
-													4 - 10 чел
-												</span>
+                                            {{ $booking->participants_count }} чел
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="excursion__card-item-date-mob">
-											<span>
-												31.07.2023
-											</span>
                                     <span>
-												16:00
-											</span>
+                                        {{ date("d.m.Y", strtotime($booking->booking_date)) }}
+                                    </span>
+                                    <span>
+                                        {{ date("H:i", strtotime($booking->booking_time)) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -162,118 +163,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="profile__events-item">
-                        <div class="profile__events-item-side">
-                            <div class="profile__events-item-pic">
-                                <img src="{{ Vite::asset('resources/images/pic/event.png') }}" alt="мероприятие">
-                            </div>
-                            <div class="profile__events-item-text">
-                                <div class="profile__events-item-name">
-                                    Кузница "Зов Огня и Металла”
-                                </div>
-                                <div class="excursion__card-hashtags">
-                                    <div class="excursion__card-hashtag">
-												<span>
-													12+
-												</span>
-                                    </div>
-                                    <div class="excursion__card-hashtag _green">
-                                        <div class="excursion__card-hashtag-icon">
-                                            <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                        </div>
-                                        <span>
-													2 ч
-												</span>
-                                    </div>
-                                    <div class="excursion__card-hashtag _yellow">
-                                        <div class="excursion__card-hashtag-icon">
-                                            <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                        </div>
-                                        <span>
-													4 - 10 чел
-												</span>
-                                    </div>
-                                </div>
-                                <div class="excursion__card-item-date-mob">
-											<span>
-												31.07.2023
-											</span>
-                                    <span>
-												16:00
-											</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile__events-item-date">
-                            <div class="profile__events-date-title">
-                                Дата и время:
-                            </div>
-                            <div class="profile__events-date-info">
-										<span>
-											31.07.2023
-										</span>
-                                <span>
-											16:00
-										</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="profile__events-item">
-                        <div class="profile__events-item-side">
-                            <div class="profile__events-item-pic">
-                                <img src="{{ Vite::asset('resources/images/pic/event.png') }}" alt="мероприятие">
-                            </div>
-                            <div class="profile__events-item-text">
-                                <div class="profile__events-item-name">
-                                    Кузница "Зов Огня и Металла”
-                                </div>
-                                <div class="excursion__card-hashtags">
-                                    <div class="excursion__card-hashtag">
-												<span>
-													12+
-												</span>
-                                    </div>
-                                    <div class="excursion__card-hashtag _green">
-                                        <div class="excursion__card-hashtag-icon">
-                                            <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                        </div>
-                                        <span>
-													2 ч
-												</span>
-                                    </div>
-                                    <div class="excursion__card-hashtag _yellow">
-                                        <div class="excursion__card-hashtag-icon">
-                                            <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                        </div>
-                                        <span>
-													4 - 10 чел
-												</span>
-                                    </div>
-                                </div>
-                                <div class="excursion__card-item-date-mob">
-											<span>
-												31.07.2023
-											</span>
-                                    <span>
-												16:00
-											</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile__events-item-date">
-                            <div class="profile__events-date-title">
-                                Дата и время:
-                            </div>
-                            <div class="profile__events-date-info">
-										<span>
-											31.07.2023
-										</span>
-                                <span>
-											16:00
-										</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="profile__events-bottom">
                     <button class="profile__events-more-btn">

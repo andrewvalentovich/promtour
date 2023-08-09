@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Excursion extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $table = 'excursions';
     protected $guarded = [];
@@ -57,5 +58,14 @@ class Excursion extends Model
     public function getDecodeScheduleAttribute(): array
     {
         return json_decode($this->schedule, true);
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

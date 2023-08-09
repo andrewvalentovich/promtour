@@ -8,7 +8,7 @@
                 </span>
             </a>
             <nav class="header__nav nav">
-                <a class="header__nav-item" href="{{ route('catalog.index') }}">
+                <a class="header__nav-item" href="{{ route('company.index') }}">
                     Предприятия
                 </a>
                 <a class="header__nav-item" href="{{ route('excursions.index') }}">
