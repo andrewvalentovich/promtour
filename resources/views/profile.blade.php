@@ -58,14 +58,19 @@
 									Мои мероприятия
 								</span>
                     </button>
-                    <button class="profile__action-btn blue">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="profile__action-btn blue">
                         <div class="icon">
                             <img src="{{ Vite::asset('resources/images/icons/settings1.svg') }}" alt="календарь">
                         </div>
                         <span>
-									Настройки аккаунта
-								</span>
-                    </button>
+{{--                            Настройки аккаунта--}}
+                            {{ __('Выйти из учётной записи') }}
+                        </span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
             <div class="profile__events">
@@ -106,6 +111,9 @@
                     </div>
                 </div>
                 <div class="profile__events-list">
+                    @if(!isset($bookings))
+                        {{ __('Вы не записаны ни на одну экскурсию') }}
+                    @else
                     @foreach($bookings as $booking)
                     <div class="profile__events-item">
                         <div class="profile__events-item-side">
@@ -164,6 +172,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
                 </div>
                 <div class="profile__events-bottom">
                     <button class="profile__events-more-btn">
