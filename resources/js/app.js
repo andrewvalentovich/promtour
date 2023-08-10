@@ -535,17 +535,26 @@ $(function(){
 $(".popup__btn[type='submit']").click(function (xhr) {
     xhr.preventDefault();
     var formData = new FormData($('.popup-record')[0]);
+    var site_url = $('input[name="site_url"]').val();
+    var matches = $('input[name="booking_date"]').val().split(".");
+    var booking_date = matches[2]+"-"+matches[1]+"-"+matches[0];
+
+    formData.delete('site_url');
+    formData.set('booking_date', booking_date);
 
     $.ajax({
         type: "POST",
         dataType: 'json',
-        url: formData.get('site_url')+`api/booking`,
+        url: site_url+`api/booking`,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
         },
         data: formData,
         contentType: false,
         processData: false,
+        beforeSend: function () {
+            $('.popup__error').text("");
+        },
         success: function (response) {
             if( response.status === 422 ) {
                 // var errors = $.parseJSON(response.errors.responseText);
@@ -554,7 +563,8 @@ $(".popup__btn[type='submit']").click(function (xhr) {
                     $("#" + key + "-error").text(val[0]);
                 });
             } else {
-                alert('Success');
+                alert('Вы записаны на экскурсию!');
+                $('.popup').removeClass('active');
             }
         }
     }, "json")

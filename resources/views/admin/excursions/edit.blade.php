@@ -122,49 +122,49 @@
                                                 <i class="d-block">При этом, если поле оставить пустым, записей в этот день не будет</i>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="monday">Понедельник</label>
-                                                    <input type="text" id="monday" value="{{ json_decode($excursion->schedule, true)['monday'] }}" name="schedule[monday]" class="form-control" placeholder="10:00, 12:00, 16:00">
+                                                    <input type="text" id="monday" value="{{ implode(', ', json_decode($excursion->schedule, true)['monday']) }}" name="schedule[monday]" class="form-control" placeholder="10:00, 12:00, 16:00">
                                                     @error('monday')
                                                     <label class="text-danger font-weight-normal" for="monday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="monday">Вторник</label>
-                                                    <input type="text" id="tuesday" value="{{ json_decode($excursion->schedule, true)['tuesday'] }}" name="schedule[tuesday]" class="form-control" placeholder="10:00">
+                                                    <input type="text" id="tuesday" value="{{ implode(', ', json_decode($excursion->schedule, true)['tuesday']) }}" name="schedule[tuesday]" class="form-control" placeholder="10:00">
                                                     @error('tuesday')
                                                     <label class="text-danger font-weight-normal" for="tuesday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="wednesday">Среда</label>
-                                                    <input type="text" id="wednesday" value="{{ json_decode($excursion->schedule, true)['wednesday'] }}" name="schedule[wednesday]" class="form-control" placeholder="9:00, 11:00, 15:00">
+                                                    <input type="text" id="wednesday" value="{{ implode(', ', json_decode($excursion->schedule, true)['wednesday']) }}" name="schedule[wednesday]" class="form-control" placeholder="9:00, 11:00, 15:00">
                                                     @error('wednesday')
                                                     <label class="text-danger font-weight-normal" for="wednesday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="thursday">Четверг</label>
-                                                    <input type="text" id="thursday" value="{{ json_decode($excursion->schedule, true)['thursday'] }}" name="schedule[thursday]" class="form-control" placeholder="Пусто (выходной)">
+                                                    <input type="text" id="thursday" value="{{ implode(', ', json_decode($excursion->schedule, true)['thursday']) }}" name="schedule[thursday]" class="form-control" placeholder="Пусто (выходной)">
                                                     @error('thursday')
                                                     <label class="text-danger font-weight-normal" for="thursday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="friday">Пятница</label>
-                                                    <input type="text" id="friday" value="{{ json_decode($excursion->schedule, true)['friday'] }}" name="schedule[friday]" class="form-control" placeholder="10:00, 12:00, 16:00">
+                                                    <input type="text" id="friday" value="{{ implode(', ', json_decode($excursion->schedule, true)['friday']) }}" name="schedule[friday]" class="form-control" placeholder="10:00, 12:00, 16:00">
                                                     @error('friday')
                                                     <label class="text-danger font-weight-normal" for="friday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="saturday">Суббота</label>
-                                                    <input type="text" id="saturday" value="{{ json_decode($excursion->schedule, true)['saturday'] }}" name="schedule[saturday]" class="form-control" placeholder="12:00, 14:00">
+                                                    <input type="text" id="saturday" value="{{ implode(', ', json_decode($excursion->schedule, true)['saturday']) }}" name="schedule[saturday]" class="form-control" placeholder="12:00, 14:00">
                                                     @error('saturday')
                                                     <label class="text-danger font-weight-normal" for="saturday">{{ $message }}</label>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label class="font-weight-normal" for="sunday">Воскресенье</label>
-                                                    <input type="text" id="sunday" value="{{ json_decode($excursion->schedule, true)['sunday'] }}" name="schedule[sunday]" class="form-control" placeholder="Пусто (выходной)">
+                                                    <input type="text" id="sunday" value="{{ implode(', ', json_decode($excursion->schedule, true)['sunday']) }}" name="schedule[sunday]" class="form-control" placeholder="Пусто (выходной)">
                                                     @error('sunday')
                                                     <label class="text-danger font-weight-normal" for="sunday">{{ $message }}</label>
                                                     @enderror
