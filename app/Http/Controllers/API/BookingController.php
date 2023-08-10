@@ -31,11 +31,12 @@ class BookingController extends Controller
 
         if($response->fails()){
             return response()->json(['status' => 422, 'errors' => $response->errors()], 200, [], JSON_UNESCAPED_UNICODE);
+        } else {
+            $data = $response->validated();
+            $user = User::find($data['user_id']);
+            $user->bookings()->create($data);
+
+            return response()->json(['status' => 200, 'success' => $response], 200, [], JSON_UNESCAPED_UNICODE);
         }
-
-//        $user = User::find($response['user_id']);
-//        $user->bookings()->create($data);
-
-        return response()->json(['status' => 200, 'success' => $response], 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
