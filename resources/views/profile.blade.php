@@ -154,12 +154,12 @@
                                 Дата и время:
                             </div>
                             <div class="profile__events-date-info">
-										<span>
-											31.07.2023
-										</span>
                                 <span>
-											16:00
-										</span>
+                                    {{ date("d.m.Y", strtotime($booking->booking_date)) }}
+                                </span>
+                                <span>
+                                    {{ date("H:i", strtotime($booking->booking_time)) }}
+                                </span>
                             </div>
                         </div>
                     </div>
