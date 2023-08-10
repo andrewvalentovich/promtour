@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary" value="Создать">
+                                    <input type="submit" class="btn btn-primary" value="Далее">
                                 </div>
                             </form>
                         </div>

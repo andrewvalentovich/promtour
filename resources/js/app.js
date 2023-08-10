@@ -287,6 +287,7 @@ if(document.querySelectorAll('.dropdown-input').length) {
                 const itemClicked = target.closest('.dropdown-input__item')
                 const text = itemClicked.querySelector('span').innerHTML.trim()
                 const title = parentBlock.querySelector('.dropdown-input__title').querySelector('input')
+                document.querySelector('.popup__left-participants-count').innerHTML = itemClicked.getAttribute('left');
                 title.value = text
                 parentBlock.classList.remove('active')
                 return
@@ -392,12 +393,17 @@ async function getExcursion(id) {
 function setInfoRecordPopup(data) {
     const popupRecord = document.querySelector('.popup-record')
     const excursionName = popupRecord.querySelector('.popup__title')
+    const participantsCount = popupRecord.querySelector('.popup__participants-count')
+    const leftParticipantsCount = popupRecord.querySelector('.popup__left-participants-count')
+    const hiddenInputExcursion = popupRecord.querySelector('input[name="excursion_id"]')
     const timeBlock = popupRecord.querySelector('.dropdown-time')
     const timeBlockList = popupRecord.querySelector('.dropdown-input__list')
 
-
     //название мероприятия
     excursionName.innerHTML = data[0].name
+    participantsCount.innerHTML = data[0].max_participants_count
+    leftParticipantsCount.innerHTML = data[0].max_participants_count
+    hiddenInputExcursion.value = data[0].excursion_id
     setAvailableDates(data)
 
     timeBlockList.innerHTML = ''
@@ -406,6 +412,7 @@ function setInfoRecordPopup(data) {
         div.classList.add('dropdown-input__item')
         div.setAttribute('date', el.date)
         div.setAttribute('time', el.time)
+        div.setAttribute('left', el.left_participants_count)
 
         let span = document.createElement('span')
         span.classList.add('text')
@@ -424,7 +431,7 @@ if(document.querySelectorAll('.open-choice').length) {
     const popupRecord = document.querySelector('.popup-record')
     excursionCardBtn.forEach(btn => {
         btn.addEventListener('click', function() {
-            const id = btn.closest('.excursion__card').getAttribute('data_id')
+            const id = (btn.closest('.excursion__card') === null) ? btn.getAttribute('data_id') : btn.closest('.excursion__card').getAttribute('data_id')
             getExcursion(id)
             popupRecord.classList.add('active')
             if(popupRecord.getAttribute('event-data_id') !== id) {
@@ -464,7 +471,7 @@ function setTimeOfCurrentDate(currentDate) {
     //убираем disabled
     timeBlock.setAttribute('disabled', 'false')
 
-    const dropdownTimeItems = document.querySelectorAll('.dropdown-input__item') 
+    const dropdownTimeItems = document.querySelectorAll('.dropdown-input__item')
     dropdownTimeItems.forEach(el => {
         if(el.getAttribute('date') === currentDate) {
             el.classList.add('active')
@@ -489,7 +496,7 @@ function clearDataPopup(popup) {
     $datepicker.val('')
 }
 
-//календарь 
+//календарь
 /* Локализация datepicker */
 $.datepicker.regional['ru'] = {
 	closeText: 'Закрыть',
@@ -524,3 +531,31 @@ $(function(){
 
 });
 
+// Отправка формы popup
+$(".popup__btn[type='submit']").click(function (xhr) {
+    xhr.preventDefault();
+    var formData = new FormData($('.popup-record')[0]);
+
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: formData.get('site_url')+`api/booking`,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if( response.status === 422 ) {
+                // var errors = $.parseJSON(response.errors.responseText);
+                console.log(response.errors);
+                $.each(response.errors, function (key, val) {
+                    $("#" + key + "-error").text(val[0]);
+                });
+            } else {
+                alert('Success');
+            }
+        }
+    }, "json")
+})

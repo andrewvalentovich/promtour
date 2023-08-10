@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="company__pagination swiper-pagination"></div>
-                <button class="company__text-btn btn btn_green open-choice">
+                <button class="company__text-btn btn btn_green open-choice" data_id="{{ $excursion->id }}">
                     Записаться на экскурсию
                 </button>
             </div>

@@ -1,28 +1,40 @@
 <form class="popup popup-record">
+
     <div class="popup__body">
         <div class="popup__content">
             <div class="popup__title">
                 Кузница "Зов Огня и Металла”
             </div>
+            <input type="hidden" name="site_url" id="site_url" value="{{ config('app.url') }}">
+
+            <input type="hidden" name="excursion_id" id="excursion_id" value="">
+            <label id="excursion_id-error" for="excursion_id"></label>
+
+            <input type="hidden" name="user_id" id="user_id" value="{{ !is_null(auth()->user()) ? auth()->user()->id : '' }}">
+            <label id="user_id-error" for="user_id"></label>
+
             <div class="popup__label-list">
                 <label class="popup__label-list-item">
                     <span>
                         ФИО
+                        <label id="name_error" for="name"></label>
                     </span>
-                    <input>
+                    <input type="name" value="{{ !is_null(auth()->user()) ? auth()->user()->name : '' }}">
                 </label>
                 <label class="popup__label-list-item date-picker">
                     <span>
                         Дата
+                        <label id="booking_date-error" for="booking_date"></label>
                     </span>
-                    <input type="text" id="datepicker">
+                    <input type="text" name="booking_date" id="datepicker">
                 </label>
                 <label class="popup__label-list-item dropdown-input dropdown-time" disabled="true">
                     <div class="dropdown-input__title">
                         <span>
                             Время
+                            <label id="booking_time-error" for="booking_time"></label>
                         </span>
-                        <input readonly id="time">
+                        <input readonly name="booking_time" id="time">
                     </div>
                     <div class="dropdown-input__list">
                         <!-- <div class="dropdown-input__item">
@@ -61,19 +73,20 @@
                     <label class="popup__label-list-item ">
                         <span>
                             Количество мест
+                            <label id="participants_count-error" for="participants_count"></label>
                         </span>
-                        <input>
+                        <input type="text" name="participants_count">
                     </label>
                     <div class="number-seats__info">
                         <div class="number-seats__info-item">
                             Мест свободно:
-                            <b>
+                            <b class="popup__left-participants-count">
                                 12
                             </b>
                         </div>
                         <div class="number-seats__info-item">
                             Всего мест:
-                            <b>
+                            <b class="popup__participants-count">
                                 32
                             </b>
                         </div>

@@ -62,6 +62,7 @@
                 </button>
                 <div class="excursion__swiper swiper">
                     <div class="swiper-wrapper">
+
                         <div class="excursion__slide swiper-slide">
                             <div class="excursion__card" data_id='4'>
                                 <div class="excursion__card-top">
@@ -112,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="excursion__slide swiper-slide">
                             <div class="excursion__card" data_id='2'>
                                 <div class="excursion__card-top">

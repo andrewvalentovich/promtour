@@ -24,3 +24,4 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
 });
 
 Route::post('excursion/schedule/', [\App\Http\Controllers\API\ExcursionController::class, 'admin'])->name('excursion.get');
+Route::post('booking', [\App\Http\Controllers\API\BookingController::class, 'store'])->name('booking.store');

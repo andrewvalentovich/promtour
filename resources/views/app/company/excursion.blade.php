@@ -29,7 +29,7 @@
             </div>
             <div class="catalog__list excursion__card-list">
                 @foreach($excursions as $excursion)
-                    <div class="excursion__card">
+                    <div class="excursion__card" data_id="{{ $excursion->id }}">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
                                 <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
@@ -37,7 +37,7 @@
                             <div class="excursion__card-hashtags">
                                 <div class="excursion__card-hashtag">
                                     <span>
-                                        {{ $excursion->age_limit }}
+                                        {{ $excursion->age_limit }}+
                                     </span>
                                 </div>
                                 <div class="excursion__card-hashtag _green">
