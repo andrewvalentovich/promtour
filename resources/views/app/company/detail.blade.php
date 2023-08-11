@@ -66,24 +66,28 @@
             </div>
             <div class="company__side">
                 <div class="company__side-preview open-gallery">
-                    <img src="{{ asset($company->photos[0]->photo_url) }}" alt="фото компании">
+                    <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="фото компании">
                 </div>
                 <div class="company__side-list">
-                    @foreach($company->photos as $photo)
-                        @if($loop->index == 3)
-                            <div class="company__side-item open-gallery">
-                                <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
-                                    <span>
-                                    {{ count($company->photos) - 4 }}+ фото
-                                </span>
-                            </div>
-                            @break
-                        @else
-                            <div class="company__side-item open-gallery">
-                                <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
-                            </div>
-                        @endif
-                    @endforeach
+                    @if(is_array($company->photos))
+                        @foreach($company->photos as $photo)
+                            @if($loop->index == 3)
+                                <div class="company__side-item open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                        <span>
+                                        {{ count($company->photos) - 4 }}+ фото
+                                    </span>
+                                </div>
+                                @break
+                            @else
+                                <div class="company__side-item open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                </div>
+                            @endif
+                        @endforeach
+                    @else
+                        {{ __('Нет фотографий') }}
+                    @endif
                 </div>
             </div>
         </div>
@@ -93,11 +97,13 @@
         <div class="gallery__content">
             <div class="gallery__swiper">
                 <div class="gallery__swiper-list">
-                    @foreach($company->photos as $photo)
-                    <div class="gallery__swiper-slide swiper-slide {{ $loop->index == 0 ? "active" : "" }}">
-                        <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
-                    </div>
-                    @endforeach
+                    @if(is_array($company->photos))
+                        @foreach($company->photos as $photo)
+                        <div class="gallery__swiper-slide swiper-slide {{ $loop->index == 0 ? "active" : "" }}">
+                            <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="gallery__swiper-prev gallery__swiper-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="27" viewBox="0 0 48 27" fill="none"><script xmlns=""/>
@@ -111,11 +117,13 @@
                 </div>
             </div>
             <div class="gallery__list">
-                @foreach($company->photos as $photo)
-                <div class="gallery__list-item">
-                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
-                </div>
-                @endforeach
+                @if(is_array($company->photos))
+                    @foreach($company->photos as $photo)
+                    <div class="gallery__list-item">
+                        <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                    </div>
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="gallery__close close popup-close">
