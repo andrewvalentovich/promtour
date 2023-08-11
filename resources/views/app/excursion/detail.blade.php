@@ -45,18 +45,13 @@
                 </div>
                 <div class="company__swiper swiper">
                     <div class="company__swiper-wrapper swiper-wrapper">
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
+                        @if(!count($excursion->photos) < 1)
+                            @foreach($excursion->photos as $photo)
+                                <div class="company__slide swiper-slide open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото экскурсии">
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="company__pagination swiper-pagination"></div>
@@ -66,24 +61,28 @@
             </div>
             <div class="company__side">
                 <div class="company__side-preview open-gallery">
-                    <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
+                    <img src="{{ !count($excursion->photos) < 1 ? $excursion->photos[0]->photo_url : "" }}" alt="фото экскурсии">
                 </div>
                 <div class="company__side-list">
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="company__side-item open-gallery">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        <span>
-                            12+ фото
-                        </span>
-                    </div>
+                    @if(!count($excursion->photos) < 1)
+                        @foreach($excursion->photos as $photo)
+                            @if($loop->index == 3)
+                                <div class="company__side-item open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                    <span>
+                                        {{ !count($excursion->photos) - 4 }}+ фото
+                                    </span>
+                                </div>
+                                @break
+                            @else
+                                <div class="company__side-item open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                </div>
+                            @endif
+                        @endforeach
+                    @else
+                        {{ __('Нет фотографий') }}
+                    @endif
                 </div>
             </div>
         </div>
@@ -93,12 +92,13 @@
         <div class="gallery__content">
             <div class="gallery__swiper">
                 <div class="gallery__swiper-list">
-                    <div class="gallery__swiper-slide swiper-slide active">
-                        <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                    </div>
-                    <div class="gallery__swiper-slide swiper-slide">
-                        <img src="{{ Vite::asset('resources/images/pic/gallery-1.png') }}" alt="фото компании">
-                    </div>
+                    @if(!count($excursion->photos) < 1)
+                        @foreach($excursion->photos as $photo)
+                            <div class="gallery__swiper-slide swiper-slide {{ $loop->index == 0 ? "active" : "" }}">
+                                <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="gallery__swiper-prev gallery__swiper-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="27" viewBox="0 0 48 27" fill="none"><script xmlns=""/>
@@ -112,12 +112,13 @@
                 </div>
             </div>
             <div class="gallery__list">
-                <div class="gallery__list-item">
-                    <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                </div>
-                <div class="gallery__list-item">
-                    <img src="{{ Vite::asset('resources/images/pic/gallery-1.png') }}" alt="фото компании">
-                </div>
+                @if(!count($excursion->photos) < 1)
+                    @foreach($excursion->photos as $photo)
+                        <div class="gallery__list-item">
+                            <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="gallery__close close popup-close">

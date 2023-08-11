@@ -45,18 +45,13 @@
                 </div>
                 <div class="company__swiper swiper">
                     <div class="company__swiper-wrapper swiper-wrapper">
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
-                        <div class="company__slide swiper-slide open-gallery">
-                            <img src="{{ Vite::asset('resources/images/pic/company.png') }}" alt="фото компании">
-                        </div>
+                        @if(!count($company->photos) < 1)
+                            @foreach($company->photos as $photo)
+                                <div class="company__slide swiper-slide open-gallery">
+                                    <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="company__pagination swiper-pagination"></div>
@@ -66,16 +61,16 @@
             </div>
             <div class="company__side">
                 <div class="company__side-preview open-gallery">
-                    <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="фото компании">
+                    <img src="{{ !count($company->photos) < 1 ? $company->photos[0]->photo_url : "" }}" alt="фото компании">
                 </div>
                 <div class="company__side-list">
-                    @if(is_array($company->photos))
+                    @if(!count($company->photos) < 1)
                         @foreach($company->photos as $photo)
                             @if($loop->index == 3)
                                 <div class="company__side-item open-gallery">
                                     <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
                                         <span>
-                                        {{ count($company->photos) - 4 }}+ фото
+                                        {{ !count($company->photos) - 4 }}+ фото
                                     </span>
                                 </div>
                                 @break
@@ -97,7 +92,7 @@
         <div class="gallery__content">
             <div class="gallery__swiper">
                 <div class="gallery__swiper-list">
-                    @if(is_array($company->photos))
+                    @if(!count($company->photos) < 1)
                         @foreach($company->photos as $photo)
                         <div class="gallery__swiper-slide swiper-slide {{ $loop->index == 0 ? "active" : "" }}">
                             <img src="{{ asset($photo->photo_url) }}" alt="фото компании">
@@ -117,7 +112,7 @@
                 </div>
             </div>
             <div class="gallery__list">
-                @if(is_array($company->photos))
+                @if(!count($company->photos) < 1)
                     @foreach($company->photos as $photo)
                     <div class="gallery__list-item">
                         <img src="{{ asset($photo->photo_url) }}" alt="фото компании">

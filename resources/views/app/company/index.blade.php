@@ -49,7 +49,7 @@
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="{{ $company->name }}">
+                                <img src="{{ !count($company->photos) < 1 ? $company->photos[0]->photo_url : "" }}" alt="{{ $company->name }}">
                             </div>
                         </div>
                         <div class="excursion__card-text">

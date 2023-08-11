@@ -15,7 +15,7 @@
                     <div class="excursion__card" data_id="{{ $excursion->id }}">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
+                                <img src="{{ !count($excursion->photos) < 1 ? $excursion->photos[0]->photo_url : "" }}" alt="{{ $excursion->name }}">
                             </div>
                             <div class="excursion__card-hashtags">
                                 <div class="excursion__card-hashtag">

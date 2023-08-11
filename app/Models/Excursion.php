@@ -12,20 +12,7 @@ class Excursion extends Model
 
     protected $table = 'excursions';
     protected $guarded = [];
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'max_participants_count_group',
-        'max_participants_count_client',
-        'duration',
-        'schedule',
-        'company_id',
-        'days_off',
-        'active_days_for_booking',
-        'age_limit',
-        'category_id',
-    ];
+    protected $fillable = [];
 
     // Привязка экскурсии к категории (много экскурсий к одной категории)
     public function category()
