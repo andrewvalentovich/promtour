@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
             'duration' => 'required|string|max:8',
             'days_off' => 'required|string',
             'schedule.*' => 'nullable|string|max:255',
-            'category_id' => 'nullable|integer|min:0|max:10',
+            'category_id' => 'nullable',
         ];
     }
 

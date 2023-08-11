@@ -2,20 +2,20 @@
 @section('content')
 <main>
     <div class="catalog container">
-        <div class="navigation">
-            <a class="navigation__item" href="#">
-                Главная
-            </a>
-            <a class="navigation__item" href="#">
-                Предприятия
-            </a>
-            <a class="navigation__item" href="#">
-                Промышленность
-            </a>
-            <a class="navigation__item" href="#">
-                Экохимия
-            </a>
-        </div>
+{{--        <div class="navigation">--}}
+{{--            <a class="navigation__item" href="#">--}}
+{{--                Главная--}}
+{{--            </a>--}}
+{{--            <a class="navigation__item" href="#">--}}
+{{--                Предприятия--}}
+{{--            </a>--}}
+{{--            <a class="navigation__item" href="#">--}}
+{{--                Промышленность--}}
+{{--            </a>--}}
+{{--            <a class="navigation__item" href="#">--}}
+{{--                Экохимия--}}
+{{--            </a>--}}
+{{--        </div>--}}
         <div class="company">
             <div class="company__text">
                 <div class="excursions__top">
@@ -23,7 +23,7 @@
                         {{ $excursion->name }}
                     </div>
                     <span class="btn btn_blue">
-                        Промышленность
+                        {{ is_null($excursion->category) ? "Нет категории" : $excursion->category->name }}
                     </span>
                 </div>
                 <p class="company__text-lead">

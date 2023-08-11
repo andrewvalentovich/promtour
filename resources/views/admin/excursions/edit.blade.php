@@ -110,7 +110,10 @@
                                 <div class="form-group">
                                     <select name="category_id" class="form-control select2" style="width: 100%;">
                                         @if(is_null($excursion->category))
-                                            <option selected="selected" value="null">Выберите категорию</option>
+                                            <option selected="selected">Выберите категорию</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
                                         @else
                                             @foreach($categories as $category)
                                                 <option {{ $category->id == $excursion->category->id ? "selected" : ''}} value="{{ $category->id }}">{{ $category->name }}</option>

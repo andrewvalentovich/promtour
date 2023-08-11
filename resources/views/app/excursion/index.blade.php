@@ -2,24 +2,27 @@
 @section('content')
     <main>
         <div class="catalog container">
-            <div class="navigation">
-                <a class="navigation__item" href="/">
-                    Главная
-                </a>
-                <a class="navigation__item" href="#">
-                    Предприятия
-                </a>
-                <a class="navigation__item" href="#">
-                    Промышленность
-                </a>
-                <a class="navigation__item" href="#">
-                    Экохимия
-                </a>
-                <a class="navigation__item" href="#">
-                    Экскурсии
-                </a>
-            </div>
+{{--            <div class="navigation">--}}
+{{--                <a class="navigation__item" href="/">--}}
+{{--                    Главная--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Предприятия--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Промышленность--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Экохимия--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Экскурсии--}}
+{{--                </a>--}}
+{{--            </div>--}}
             <div class="catalog__sort">
+                <div class="excursions__title title" style="font-size:38px;padding-right: 20px;">
+                    Экскурсии
+                </div>
                 <div class="sort close-out">
                     <button class="sort__title btn btn_green catalog__title_green">
 							<span>
@@ -31,27 +34,19 @@
                         </picture>
                     </button>
                     <div class="sort__list">
+                        @foreach($categories as $category)
                         <div class="sort__list-item">
-								<span>
-									Отрасль1
-								</span>
+                            <span>
+                                {{ $category->name }}
+                            </span>
                         </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль2
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль3
-								</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="sort close-out">
                     <button class="sort__title btn btn_blue-dark catalog__title_blue-dark">
 							<span>
-								Предприятия
+								Возрастное ограничение
 							</span>
                         <picture>
                             <source media="(max-width: 539px)" srcset="{{ Vite::asset('resources/images/icons/arrow-white_mob.svg') }}">
@@ -61,17 +56,17 @@
                     <div class="sort__list">
                         <div class="sort__list-item">
 								<span>
-								Предприятия1
+								6+
 								</span>
                         </div>
                         <div class="sort__list-item">
 								<span>
-								Предприятия2
+								14+
 								</span>
                         </div>
                         <div class="sort__list-item">
 								<span>
-								Предприятия3
+								18+
 								</span>
                         </div>
                     </div>
@@ -82,7 +77,7 @@
                     <div  class="excursion__card" data_id="{{ $excursion->id }}">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
+                                <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="{{ $excursion->name }}">
                             </div>
                             <div class="excursion__card-hashtags">
                                 <div class="excursion__card-hashtag">
@@ -114,7 +109,7 @@
                                     {{ $excursion->name }}
                                 </h3>
                                 <p class="excursion__card-lead">
-                                    {{ Str::limit($excursion->description, 80) }}
+                                    {{ $excursion->description }}
                                 </p>
                             </div>
                             <div class="excursion__card-btns">

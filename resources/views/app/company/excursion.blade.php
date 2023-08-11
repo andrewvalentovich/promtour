@@ -2,30 +2,13 @@
 @section('content')
     <main>
         <div class="catalog container">
-            <div class="navigation">
-                <a class="navigation__item" href="#">
-                    Главная
-                </a>
-                <a class="navigation__item" href="#">
-                    Предприятия
-                </a>
-                <a class="navigation__item" href="#">
-                    Промышленность
-                </a>
-                <a class="navigation__item" href="#">
-                    Экохимия
-                </a>
-                <a class="navigation__item" href="#">
-                    Экскурсии
-                </a>
-            </div>
             <div class="excursions__top">
-                <div class="excursions__title title">
-                    Экохимия
+                <div class="excursions__title title" style="font-size:38px;">
+                    Экскурсии
                 </div>
                 <span class="btn btn_blue">
-						Промышленность
-					</span>
+                    {{ $category }}
+                </span>
             </div>
             <div class="catalog__list excursion__card-list">
                 @foreach($excursions as $excursion)

@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
             'max_participants_count_client' => 'nullable|integer',
             'duration' => 'nullable|string',
             'schedule.*' => 'nullable|string|max:255',
-            'category_id' => 'nullable|integer|min:0|max:10',
+            'category_id' => 'nullable',
         ];
     }
 

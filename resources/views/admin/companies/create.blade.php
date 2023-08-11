@@ -65,7 +65,7 @@
 
                                 <div class="form-group">
                                     <select name="category_id" class="form-control select2" style="width: 100%;">
-                                        <option selected="selected" value="null">Выберите категорию</option>
+                                        <option selected="selected">Выберите категорию</option>
                                         @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach

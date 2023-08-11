@@ -27,8 +27,8 @@ class UpdateRequest extends FormRequest
             'name' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
             'description' => 'nullable|string',
-            'category_id' => 'nullable|integer|min:0|max:10',
             'video' => 'nullable|string',
+            'category_id' => 'nullable',
         ];
     }
 

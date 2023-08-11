@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Excursion;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::orderBy('created_at', 'desc')->get();
-        return view('app.company.index', compact('companies'));
+        $categories = Category::where('type', 1)->get();
+        return view('app.company.index', compact('companies', 'categories'));
     }
 
     public function detail(string $slug)
@@ -25,6 +27,9 @@ class CompanyController extends Controller
         $excursions = Excursion::whereHas('company', function($query) use ($slug){
             $query->where('slug', $slug);
         })->get();
-        return view('app.company.excursion', compact('excursions'));
+
+
+        $category = $excursions[0]->category ? $excursions[0]->category->name : "Нет категории";
+        return view('app.company.excursion', compact('excursions', 'category'));
     }
 }

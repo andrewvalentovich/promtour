@@ -90,6 +90,7 @@ class ExcursionController extends Controller
         $data['schedule'] = json_encode($schedule, JSON_UNESCAPED_UNICODE);
         unset($schedule);
 
+        $excursion->update($data);
         return redirect()->route('admin.excursions.show', compact('excursion'));
     }
 

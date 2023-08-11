@@ -2,24 +2,27 @@
 @section('content')
     <main>
         <div class="catalog container">
-            <div class="navigation">
-                <a class="navigation__item" href="/">
-                    Главная
-                </a>
-                <a class="navigation__item" href="#">
-                    Предприятия
-                </a>
-                <a class="navigation__item" href="#">
-                    Промышленность
-                </a>
-                <a class="navigation__item" href="#">
-                    Экохимия
-                </a>
-                <a class="navigation__item" href="#">
-                    Экскурсии
-                </a>
-            </div>
+{{--            <div class="navigation">--}}
+{{--                <a class="navigation__item" href="/">--}}
+{{--                    Главная--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Предприятия--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Промышленность--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Экохимия--}}
+{{--                </a>--}}
+{{--                <a class="navigation__item" href="#">--}}
+{{--                    Экскурсии--}}
+{{--                </a>--}}
+{{--            </div>--}}
             <div class="catalog__sort">
+                <div class="excursions__title title" style="font-size:38px;padding-right: 20px;">
+                    Предприятия
+                </div>
                 <div class="sort close-out">
                     <button class="sort__title btn btn_green catalog__title_green">
 							<span>
@@ -31,49 +34,13 @@
                         </picture>
                     </button>
                     <div class="sort__list">
-                        <div class="sort__list-item">
-								<span>
-									Отрасль1
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль2
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Отрасль3
-								</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="sort close-out">
-                    <button class="sort__title btn btn_blue-dark catalog__title_blue-dark">
-							<span>
-								Предприятия
-							</span>
-                        <picture>
-                            <source media="(max-width: 539px)" srcset="{{ Vite::asset('resources/images/icons/arrow-white_mob.svg') }}">
-                            <img class="arrow" src="{{ Vite::asset('resources/images/icons/arrow-white.svg') }}" alt="стрелочка">
-                        </picture>
-                    </button>
-                    <div class="sort__list">
-                        <div class="sort__list-item">
-								<span>
-								Предприятия1
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Предприятия2
-								</span>
-                        </div>
-                        <div class="sort__list-item">
-								<span>
-								Предприятия3
-								</span>
-                        </div>
+                        @foreach($categories as $category)
+                            <div class="sort__list-item">
+                            <span>
+                                {{ $category->name }}
+                            </span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -82,7 +49,7 @@
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="вкусные тайны">
+                                <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="{{ $company->name }}">
                             </div>
                         </div>
                         <div class="excursion__card-text">
@@ -91,7 +58,7 @@
                                     {{ $company->name }}
                                 </h3>
                                 <p class="excursion__card-lead">
-                                    {{ Str::limit($company->description, 80) }}
+                                    {{ $company->description }}
                                 </p>
                             </div>
                             <div class="excursion__card-btns">

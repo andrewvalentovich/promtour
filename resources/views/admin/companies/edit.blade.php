@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <select name="category_id" class="form-control select2" style="width: 100%;">
                                         @if(is_null($company->category))
-                                            <option selected="selected" value="null">Выберите категорию</option>
+                                            <option selected="selected">Выберите категорию</option>
                                         @else
                                             @foreach($categories as $category)
                                                 <option {{ $category->id == $company->category->id ? "selected" : ''}} value="{{ $category->id }}">{{ $category->name }}</option>
