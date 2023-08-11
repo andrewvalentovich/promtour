@@ -82,7 +82,7 @@
                     <div class="excursion__card">
                         <div class="excursion__card-top">
                             <div class="excursion__card-pic">
-                                <img src="{{ $company->photos[0]->photo_url }}" alt="вкусные тайны">
+                                <img src="{{ is_array($company->photos) ? $company->photos[0]->photo_url : "" }}" alt="вкусные тайны">
                             </div>
                         </div>
                         <div class="excursion__card-text">
