@@ -34,6 +34,7 @@ class StoreRequest extends FormRequest
             'duration' => 'required|string|max:8',
             'days_off' => 'required|string',
             'schedule.*' => 'nullable|string|max:255',
+            'category_id' => 'nullable|integer|min:0|max:10',
         ];
     }
 
@@ -72,6 +73,9 @@ class StoreRequest extends FormRequest
             'days_off.string' => 'Данное поле должно быть строкой',
             'schedule.*.string' => 'Данное поле должно быть строкой',
             'schedule.*.max' => 'Максимальная длина данного поля не должна превышать 255 символов',
+            'category_id.integer' => 'Данное поле должно быть числом',
+            'category_id.min' => 'Данное поле должно быть больше :min',
+            'category_id.max' => 'Данное поле должно быть меньше :max',
         ];
     }
 }

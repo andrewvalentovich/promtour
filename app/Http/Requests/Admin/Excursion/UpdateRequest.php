@@ -33,6 +33,7 @@ class UpdateRequest extends FormRequest
             'max_participants_count_client' => 'nullable|integer',
             'duration' => 'nullable|string',
             'schedule.*' => 'nullable|string|max:255',
+            'category_id' => 'nullable|integer|min:0|max:10',
         ];
     }
 
@@ -60,6 +61,9 @@ class UpdateRequest extends FormRequest
             'schedule.string' => 'Данное поле должно быть строкой',
             'schedule.*.string' => 'Данное поле должно быть строкой',
             'schedule.*.max' => 'Максимальная длина данного поля не должна превышать 255 символов',
+            'category_id.integer' => 'Данное поле должно быть числом',
+            'category_id.min' => 'Данное поле должно быть больше :min',
+            'category_id.max' => 'Данное поле должно быть меньше :max',
         ];
     }
 }

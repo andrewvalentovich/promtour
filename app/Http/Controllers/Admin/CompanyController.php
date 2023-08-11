@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Company\UpdateRequest;
 use App\Http\Requests\Admin\Company\StoreRequest;
+use App\Models\Category;
 use App\Models\Company;
 
 class CompanyController extends Controller
@@ -23,7 +24,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('admin.companies.create');
+        $categories = Category::where('type', 1)->get();
+        return view('admin.companies.create', compact('categories'));
     }
 
     /**
@@ -51,7 +53,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('admin.companies.edit', compact('company'));
+        $categories = Category::where('type', 1)->get();
+        return view('admin.companies.edit', compact('company', 'categories'));
     }
 
     /**

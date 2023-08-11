@@ -14,6 +14,12 @@ class Excursion extends Model
     protected $guarded = [];
     protected $fillable = [];
 
+    // Привязка экскурсии к категории (много экскурсий к одной категории)
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
     // Привязка компании к фотографиям (одна компания имеет несколько фотографий)
     public function photos()
     {

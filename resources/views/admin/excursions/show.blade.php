@@ -96,6 +96,9 @@
                             <p class="text-sm">Возрастное ограничение
                                 <b class="d-block">{{ $excursion->age_limit }}</b>
                             </p>
+                            <p class="text-sm">Категория
+                                <b class="d-block">{{ is_null($excursion->category) ? 'Нет категории' : $excursion->category->name }}</b>
+                            </p>
                         </div>
                     </div>
                 </div>

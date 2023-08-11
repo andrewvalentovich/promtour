@@ -14,6 +14,12 @@ class Company extends Model
     protected $guarded = [];
     protected $fillable = [];
 
+    // Привязка компании к категории (много компаний к одной категории)
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
     // Привязка компании к фотографиям (одна компания имеет несколько фотографий)
     public function photos()
     {

@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::get('/', \App\Http\Controllers\Admin\IndexController::class)->name('admin.index');
         Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class); // CRUD model Company
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class); // CRUD model User
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class); // CRUD model Category
 
         // docs: https://laravel.com/docs/10.x/controllers
         Route::resource('companies.excursions', \App\Http\Controllers\Admin\ExcursionController::class)->shallow(); // CRUD model Excursion

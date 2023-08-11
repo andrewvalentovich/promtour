@@ -48,6 +48,10 @@
                                 <textarea id="description" class="form-control" rows="8" readonly>{{ $company->description }}</textarea>
                             </div>
                             <div class="form-group">
+                                <label for="description">Категория</label>
+                                <input type="text" id="title" class="form-control" value="{{ is_null($company->category) ? 'Нет категории' : $company->category->name }}" readonly>
+                            </div>
+                            <div class="form-group">
                                 <label for="video">Видео</label>
                                 <textarea id="video" class="form-control" rows="8" readonly>{{ $company->video }}</textarea>
                             </div>

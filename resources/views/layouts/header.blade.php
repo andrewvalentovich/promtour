@@ -1,10 +1,10 @@
 <header class="header-w">
     <div class="header">
         <div class="header__content container">
-            <a href="/" class="header__logo logo">
+            <a href="{{ route('index') }}" class="header__logo logo">
                 <img src="{{ Vite::asset('resources/images/icons/map-point.svg') }}" alt="точка на карте">
                 <span>
-                    ПРОМТУР
+                    TIUTOUR.RU
                 </span>
             </a>
             <nav class="header__nav nav">

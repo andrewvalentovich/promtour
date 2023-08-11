@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Excursion\StoreRequest;
 use App\Http\Requests\Admin\Excursion\UpdateRequest;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Excursion;
 
@@ -25,7 +26,8 @@ class ExcursionController extends Controller
      */
     public function create(Company $company)
     {
-        return view('admin.excursions.create', compact('company'));
+        $categories = Category::where('type', 0)->get();
+        return view('admin.excursions.create', compact('company', 'categories'));
     }
 
     /**
@@ -65,7 +67,8 @@ class ExcursionController extends Controller
      */
     public function edit(Excursion $excursion)
     {
-        return view('admin.excursions.edit', compact('excursion'));
+        $categories = Category::where('type', 0)->get();
+        return view('admin.excursions.edit', compact('excursion', 'categories'));
     }
 
     /**

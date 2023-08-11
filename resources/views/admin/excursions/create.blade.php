@@ -73,6 +73,19 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="">Выберите категорию</label>
+                                    <select name="category_id" class="form-control select2" style="width: 100%;">
+                                        <option selected="selected" value="null">Выберите категорию</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <label class="text-danger font-weight-normal" for="category_id">{{ $message }}</label>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <label for="">Продолжительсть экскурсии в формате 00:00:00 (часы:минуты:секунды)</label>
                                     <div class="input-group date">
                                         <input type="text" id="excursions_create_duration" name="duration" value="{{ old('duration') ?? "00:00:00" }}" class="form-control"/>

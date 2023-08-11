@@ -107,6 +107,21 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group">
+                                    <select name="category_id" class="form-control select2" style="width: 100%;">
+                                        @if(is_null($excursion->category))
+                                            <option selected="selected" value="null">Выберите категорию</option>
+                                        @else
+                                            @foreach($categories as $category)
+                                                <option {{ $category->id == $excursion->category->id ? "selected" : ''}} value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('category_id')
+                                    <label class="text-danger font-weight-normal" for="category_id">{{ $message }}</label>
+                                    @enderror
+                                </div>
+
                                 <div id="accordion">
                                     <div class="card card-success">
                                         <div class="card-header">
