@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Photo;
+namespace App\Http\Requests\Admin\ExcursionPhoto;
 
 use Illuminate\Foundation\Http\FormRequest;
 

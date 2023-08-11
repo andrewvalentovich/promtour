@@ -14,6 +14,12 @@ class Excursion extends Model
     protected $guarded = [];
     protected $fillable = [];
 
+    // Привязка компании к фотографиям (одна компания имеет несколько фотографий)
+    public function photos()
+    {
+        return $this->HasMany(ExcursionPhoto::class);
+    }
+
     // Привязка экскурсий к компании (много экскурсий к одной компании)
     public function company()
     {

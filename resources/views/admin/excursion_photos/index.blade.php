@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Фотографии компании {{ $company->name }}</h1>
+                    <h1 class="m-0">Фотографии экскурсии {{ $excursion->name }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -21,7 +21,7 @@
                 <div class="col-10">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.companies.photos.create', $company->id) }}" class="btn btn-primary">Добавить фотографии</a>
+                            <a href="{{ route('admin.excursions.photos.create', $excursion->id) }}" class="btn btn-primary">Добавить фотографии</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -43,18 +43,18 @@
                                             @endif
                                         </td>
                                         <td class="project-actions">
-                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.photos.show', $photo->id) }}">
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.excursions.photos.show', $photo->id) }}">
                                                 <i class="fas fa-folder"></i>
                                                 Открыть
                                             </a>
-                                            <a class="btn btn-info btn-sm" href="{{ route('admin.photos.edit', $photo->id) }}">
+                                            <a class="btn btn-info btn-sm" href="{{ route('admin.excursions.photos.edit', $photo->id) }}">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 Редактировать
                                             </a>
                                             <form
                                                 id="delete_photo_form-{{ $photo->id }}"
                                                 style="display: none;"
-                                                action="{{ route('admin.photos.destroy', $photo->id) }}"
+                                                action="{{ route('admin.excursions.photos.destroy', $photo->id) }}"
                                                 method="post"
                                             >
                                                 @csrf

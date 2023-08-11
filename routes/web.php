@@ -48,10 +48,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class); // CRUD model User
 
         // docs: https://laravel.com/docs/10.x/controllers
-        Route::resource('companies.photos', \App\Http\Controllers\Admin\PhotoController::class)->shallow(); // CRUD model Photo
         Route::resource('companies.excursions', \App\Http\Controllers\Admin\ExcursionController::class)->shallow(); // CRUD model Excursion
 
 //        Route::resource('users.bookings', \App\Http\Controllers\Admin\BookingController::class)->shallow(); // CRUD model Booking
+
+        Route::get('/companies/{company}/photos', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'index'])->name('companies.photos.index'); // CRUD model CompanyPhoto
+        Route::get('/companies/{company}/photos/create', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'create'])->name('companies.photos.create');
+        Route::post('/companies/{company}/photos', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'store'])->name('companies.photos.store');
+        Route::get('/companies/photos/{photo}/', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'show'])->name('companies.photos.show');
+        Route::get('/companies/photos/{photo}/edit', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'edit'])->name('companies.photos.edit');
+        Route::patch('/companies/photos/{photo}', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'update'])->name('companies.photos.update');
+        Route::delete('/companies/photos/{photo}', [\App\Http\Controllers\Admin\CompanyPhotoController::class, 'destroy'])->name('companies.photos.destroy');
+
+        Route::get('/excursions/{excursion}/photos', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'index'])->name('excursions.photos.index'); // CRUD model ExcursionPhoto
+        Route::get('/excursions/{excursion}/photos/create', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'create'])->name('excursions.photos.create');
+        Route::post('/excursions/{excursion}/photos', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'store'])->name('excursions.photos.store');
+        Route::get('/excursions/photos/{photo}/', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'show'])->name('excursions.photos.show');
+        Route::get('/excursions/photos/{photo}/edit', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'edit'])->name('excursions.photos.edit');
+        Route::patch('/excursions/photos/{photo}', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'update'])->name('excursions.photos.update');
+        Route::delete('/excursions/photos/{photo}', [\App\Http\Controllers\Admin\ExcursionPhotoController::class, 'destroy'])->name('excursions.photos.destroy');
 
         Route::get('/bookings', [\App\Http\Controllers\Admin\BookingController::class, 'all'])->name('bookings.index');
         Route::get('/users/{user}/bookings', [\App\Http\Controllers\Admin\BookingController::class, 'index'])->name('users.bookings.index');

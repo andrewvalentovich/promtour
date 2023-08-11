@@ -17,7 +17,7 @@ class Company extends Model
     // Привязка компании к фотографиям (одна компания имеет несколько фотографий)
     public function photos()
     {
-        return $this->HasMany(Photo::class);
+        return $this->HasMany(CompanyPhoto::class);
     }
 
     // Привязка компании к экскурсиям (одна компания имеет несколько экскурсий)

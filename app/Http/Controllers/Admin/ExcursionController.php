@@ -95,6 +95,11 @@ class ExcursionController extends Controller
      */
     public function destroy(Excursion $excursion)
     {
+        // Удаляем фотографии, принадлежащие данной компании
+        foreach ($excursion->photos() as $photo) {
+            $photo->delete();
+        }
+
         $company = $excursion->company()->get()[0];
         // Отвязываем фото от компании, сохраняем изменения и удаляем экскурсию
         $excursion->company()->dissociate();

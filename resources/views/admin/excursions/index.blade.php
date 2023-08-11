@@ -31,6 +31,7 @@
                                         <td style="width: 40px">#</td>
                                         <td style="width: 200px">Название</td>
                                         <td>Короткое описание</td>
+                                        <td style="width:140px;">Элементы</td>
                                         <td style="width:330px;">Действия</td>
                                     </tr>
                                 </thead>
@@ -40,6 +41,12 @@
                                             <td>{{ $excursion->id }}</td>
                                             <td>{{ $excursion->name }}</td>
                                             <td>{{ \Illuminate\Support\Str::limit($excursion->description, 60) }}</td>
+                                            <td class="project-actions">
+                                                <a class="btn btn-warning btn-sm" href="{{ route('admin.excursions.photos.index', $excursion->id) }}">
+                                                    <i class="fas fa-external-link-square-alt"></i>
+                                                    Фотографии
+                                                </a>
+                                            </td>
                                             <td class="project-actions">
                                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.excursions.show', $excursion->id) }}">
                                                     <i class="fas fa-folder"></i>
