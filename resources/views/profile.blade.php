@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="profile__events-list">
-                    @if(!isset($bookings))
+                    @if(count($bookings) == 0)
                         {{ __('Вы не записаны ни на одну экскурсию') }}
                     @else
                     @foreach($bookings as $booking)

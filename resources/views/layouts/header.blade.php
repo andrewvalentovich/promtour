@@ -43,10 +43,10 @@
 <div class="header-m">
     <div class="header-m__content">
         <nav class="header-m__nav">
-            <a class="header-m__nav-item" href="#">
+            <a class="header-m__nav-item" href="{{ route('company.index') }}">
                 Предприятия
             </a>
-            <a class="header-m__nav-item" href="#">
+            <a class="header-m__nav-item" href="{{ route('excursions.index') }}">
                 Экскурсии
             </a>
             <a class="header-m__nav-item" href="#">
@@ -57,7 +57,7 @@
             </a>
         </nav>
         <div class="header__auth">
-            <a href="registration.html" class="header__auth-item reg">
+            <a href="{{ route('register') }}" class="header__auth-item reg">
                 Регистрация
             </a>
         </div>
