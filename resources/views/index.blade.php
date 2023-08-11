@@ -62,48 +62,48 @@
                 </button>
                 <div class="excursion__swiper swiper">
                     <div class="swiper-wrapper">
-
+                        @foreach($excursions as $excursion)
                         <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card" data_id='4'>
+                            <div class="excursion__card" data_id='{{ $excursion->id }}'>
                                 <div class="excursion__card-top">
                                     <div class="excursion__card-pic">
                                         <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
                                     </div>
                                     <div class="excursion__card-hashtags">
                                         <div class="excursion__card-hashtag">
-												<span>
-													8+
-												</span>
+                                            <span>
+                                                {{ $excursion->age_limit }}+
+                                            </span>
                                         </div>
                                         <div class="excursion__card-hashtag _green">
                                             <div class="excursion__card-hashtag-icon">
                                                 <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
                                             </div>
                                             <span>
-													1,5 ч
-												</span>
+                                                {{ (int) $excursion->duration }} ч
+                                            </span>
                                         </div>
                                         <div class="excursion__card-hashtag _yellow">
                                             <div class="excursion__card-hashtag-icon">
                                                 <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
                                             </div>
                                             <span>
-													5 - 15 чел
-												</span>
+                                                0 - {{ $excursion->max_participants_count_group }} чел
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="excursion__card-text">
                                     <div class="excursion__card-desc">
                                         <h3>
-                                            Сыроварня "Вкусные Тайны"
+                                            {{ $excursion->name }}
                                         </h3>
                                         <p class="excursion__card-lead">
-                                            Откройте для себя процесс создания настоящего сыра с традиционными и современными методами...
+                                            {{ Str::limit($excursion->description, 80) }}
                                         </p>
                                     </div>
                                     <div class="excursion__card-btns">
-                                        <a href="#" class="excursion__card-btn btn btn_blue">
+                                        <a href="{{ route('excursion.detail', $excursion->slug) }}" class="excursion__card-btn btn btn_blue">
                                             Подробнее
                                         </a>
                                         <button class="excursion__card-btn btn btn_green open-choice">
@@ -113,158 +113,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card" data_id='2'>
-                                <div class="excursion__card-top">
-                                    <div class="excursion__card-pic">
-                                        <img src="{{ Vite::asset('resources/images/pic/card-2.png') }}" alt="вкусные тайны">
-                                    </div>
-                                    <div class="excursion__card-hashtags">
-                                        <div class="excursion__card-hashtag">
-												<span>
-													12+
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _green">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                            </div>
-                                            <span>
-													2 ч
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _yellow">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                            </div>
-                                            <span>
-													4 - 10 чел
-												</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="excursion__card-text">
-                                    <div class="excursion__card-desc">
-                                        <h3>
-                                            Кузница "Зов Огня и Металла”
-                                        </h3>
-                                        <p class="excursion__card-lead">
-
-                                            Вас ждет захватывающее зрелище мастерства кузнецов, которые создают изящные металлические шедевры...
-                                        </p>
-                                    </div>
-                                    <div class="excursion__card-btns">
-                                        <a href="#" class="excursion__card-btn btn btn_blue">
-                                            Подробнее
-                                        </a>
-                                        <button class="excursion__card-btn btn btn_green open-choice">
-                                            Выбрать тур
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card">
-                                <div class="excursion__card-top">
-                                    <div class="excursion__card-pic">
-                                        <img src="{{ Vite::asset('resources/images/pic/card-3.png') }}" alt="вкусные тайны">
-                                    </div>
-                                    <div class="excursion__card-hashtags">
-                                        <div class="excursion__card-hashtag">
-												<span>
-													10+
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _green">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                            </div>
-                                            <span>
-													2 ч
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _yellow">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                            </div>
-                                            <span>
-													6 - 20 чел
-												</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="excursion__card-text">
-                                    <div class="excursion__card-desc">
-                                        <h3>
-                                            Текстильная Фабрика
-                                        </h3>
-                                        <p class="excursion__card-lead">
-                                            Посетите ткацкие цехи и узнайте о том, как из мягкой пряжи возникают красочные ткани...
-                                        </p>
-                                    </div>
-                                    <div class="excursion__card-btns">
-                                        <a href="#" class="excursion__card-btn btn btn_blue">
-                                            Подробнее
-                                        </a>
-                                        <button class="excursion__card-btn btn btn_green open-choice">
-                                            Выбрать тур
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card">
-                                <div class="excursion__card-top">
-                                    <div class="excursion__card-pic">
-                                        <img src="{{ Vite::asset('resources/images/pic/card-1.png') }}" alt="вкусные тайны">
-                                    </div>
-                                    <div class="excursion__card-hashtags">
-                                        <div class="excursion__card-hashtag">
-												<span>
-													8+
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _green">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/clock.svg') }}" alt="количество часов">
-                                            </div>
-                                            <span>
-													1,5 ч
-												</span>
-                                        </div>
-                                        <div class="excursion__card-hashtag _yellow">
-                                            <div class="excursion__card-hashtag-icon">
-                                                <img src="{{ Vite::asset('resources/images/icons/people.svg') }}" alt="количество человек">
-                                            </div>
-                                            <span>
-													5 - 15 чел
-												</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="excursion__card-text">
-                                    <div class="excursion__card-desc">
-                                        <h3>
-                                            Сыроварня "Вкусные Тайны"
-                                        </h3>
-                                        <p class="excursion__card-lead">
-                                            Откройте для себя процесс создания настоящего сыра с традиционными и современными методами...
-                                        </p>
-                                    </div>
-                                    <div class="excursion__card-btns">
-                                        <a href="#" class="excursion__card-btn btn btn_blue">
-                                            Подробнее
-                                        </a>
-                                        <button class="excursion__card-btn btn btn_green open-choice">
-                                            Выбрать тур
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="excursion__article">
@@ -372,8 +221,8 @@
                                     Экохимия
                                 </b>
                                 <span>
-										Химический завод
-									</span>
+                                    Химический завод
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -419,8 +268,8 @@
                                 Тканево
                             </b>
                             <span>
-									Текстильная фабрика
-								</span>
+                                Текстильная фабрика
+                            </span>
                         </div>
                     </div>
                 </div>
