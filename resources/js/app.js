@@ -218,6 +218,20 @@ if(document.querySelectorAll('.gallery__swiper').length) {
 
 }
 
+//смена картинки в company__side-preview при наведении на company__side-item
+
+if(document.querySelectorAll('.company__side-item').length) {
+    const companySidePreviewImg = document.querySelector('.company__side-preview').querySelector('img')
+    const companySideItem = document.querySelectorAll('.company__side-item')
+
+    companySideItem.forEach(element => {
+        element.addEventListener('mouseover', function(e) {
+            const src = element.querySelector('img').getAttribute('src')
+            companySidePreviewImg.setAttribute('src', src)
+        })
+    });
+
+}
 
 //enterprises__switch-btn
 if(document.querySelectorAll('.enterprises__switch-btn').length) {
@@ -430,7 +444,9 @@ if(document.querySelectorAll('.open-choice').length) {
     const excursionCardBtn = document.querySelectorAll('.open-choice')
     const popupRecord = document.querySelector('.popup-record')
     excursionCardBtn.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation()
+            e.preventDefault()
             const id = (btn.closest('.excursion__card') === null) ? btn.getAttribute('data_id') : btn.closest('.excursion__card').getAttribute('data_id')
             getExcursion(id)
             popupRecord.classList.add('active')

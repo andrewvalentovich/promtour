@@ -64,7 +64,7 @@
                     <div class="swiper-wrapper">
                         @foreach($excursions as $excursion)
                         <div class="excursion__slide swiper-slide">
-                            <div class="excursion__card" data_id='{{ $excursion->id }}'>
+                            <a href="{{ route('excursion.detail', $excursion->slug) }}" class="excursion__card" data_id='{{ $excursion->id }}'>
                                 <div class="excursion__card-top">
                                     <div class="excursion__card-pic">
                                         <img src="{{ !count($excursion->photos) < 1 ? $excursion->photos[0]->photo_url : "" }}" alt="{{ $excursion->name }}" alt="вкусные тайны">
@@ -103,15 +103,15 @@
                                         </p>
                                     </div>
                                     <div class="excursion__card-btns">
-                                        <a href="{{ route('excursion.detail', $excursion->slug) }}" class="excursion__card-btn btn btn_blue">
+                                        <div class="excursion__card-btn btn btn_blue">
                                             Подробнее
-                                        </a>
+                                        </div>
                                         <button class="excursion__card-btn btn btn_green open-choice">
                                             Выбрать тур
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @endforeach
                     </div>
