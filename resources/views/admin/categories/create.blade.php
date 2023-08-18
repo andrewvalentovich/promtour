@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <select name="type" class="custom-select form-control" id="type">
                             <option disabled selected>Тип</option>
-                            <option value="0">Экскурскии</option>
+                            <option value="0">Экскурсии</option>
                             <option value="1">Компании</option>
                         </select>
                         @error('type')

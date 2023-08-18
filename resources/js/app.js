@@ -5,15 +5,15 @@ import.meta.glob([
 
 import './bootstrap';
 import './jquery';
-import './jquery-1.12.4'
-import './jquery-ui'
-// import './bodyScrollLock.min.js';
+import './jquery-1.12.4';
+import './jquery-ui';
+import './url';
 
+// import './bodyScrollLock.min.js';
 
 function changerActive(list) {
     for(let i = 0; i < list.length; i++) {
-        list[i].classList.remove('active')
-
+        list[i].classList.remove('active');
     }
     list = 0
 }
@@ -276,6 +276,10 @@ if(document.querySelectorAll('.sort').length) {
                 const title = sortBlock.querySelector('.sort__title').querySelector('span')
                 title.innerHTML = text
                 sortBlock.classList.remove('active')
+                const id = itemClicked.querySelector('span').getAttribute('data_id')
+                const name = itemClicked.querySelector('span').getAttribute('data_name')
+                history.pushState(null, null, $.query.set(name, id));
+                location.reload();
                 return
             }
         })
