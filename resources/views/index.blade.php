@@ -181,24 +181,11 @@
                 В этом блоке вы найдете список впечатляющих предприятий, которые стали партнерами и клиентами нашей компании.
             </div>
             <div class="enterprises__switch-btns">
-                <button class="enterprises__switch-btn btn btn_blue">
-                    Все
-                </button>
-                <button class="enterprises__switch-btn btn btn_blue">
-                    Технологии
-                </button>
-                <button class="enterprises__switch-btn btn btn_blue">
-                    Туризм
-                </button>
-                <button class="enterprises__switch-btn btn btn_blue">
-                    Образование
-                </button>
-                <button class="enterprises__switch-btn btn btn_blue active">
-                    Промышленность
-                </button>
-                <button class="enterprises__switch-btn btn btn_blue">
-                    Благотворительность
-                </button>
+                @foreach($categories as $category)
+                    <a href="{{ route('company.index', ['category' => $category->id]) }}" class="enterprises__switch-btn btn btn_blue">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
             </div>
             <div class="enterprises__gallery">
                 <div class="enterprises__gallery-left">
@@ -210,8 +197,8 @@
                                     Продуктовед
                                 </b>
                                 <span>
-										Пищевая компания
-									</span>
+                                    Пищевая компания
+                                </span>
                             </div>
                         </div>
                         <div class="enterprises__gallery-item _gorizontal-mini">

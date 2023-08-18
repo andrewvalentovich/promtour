@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Category;
+use App\Models\Company;
 use App\Models\Excursion;
 use App\Models\HowToBook;
 use Illuminate\Http\Request;
@@ -17,7 +19,10 @@ class IndexController extends Controller
     public function index()
     {
         $excursions = Excursion::orderBy('created_at', 'desc')->take(10)->get();
-        return view('index', compact('excursions'));
+        $categories = Category::where('type', 1)->get();
+        $companies = Company::orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('index', compact('excursions', 'categories', 'companies'));
     }
 
     /**

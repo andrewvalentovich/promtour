@@ -2,43 +2,24 @@
 @section('content')
     <main>
         <div class="catalog container">
-{{--            <div class="navigation">--}}
-{{--                <a class="navigation__item" href="/">--}}
-{{--                    Главная--}}
-{{--                </a>--}}
-{{--                <a class="navigation__item" href="#">--}}
-{{--                    Предприятия--}}
-{{--                </a>--}}
-{{--                <a class="navigation__item" href="#">--}}
-{{--                    Промышленность--}}
-{{--                </a>--}}
-{{--                <a class="navigation__item" href="#">--}}
-{{--                    Экохимия--}}
-{{--                </a>--}}
-{{--                <a class="navigation__item" href="#">--}}
-{{--                    Экскурсии--}}
-{{--                </a>--}}
-{{--            </div>--}}
             <div class="catalog__sort">
                 <div class="excursions__title title" style="font-size:38px;padding-right: 20px;">
                     Предприятия
                 </div>
                 <div class="sort close-out">
-                    <button class="sort__title btn btn_green catalog__title_green">
-							<span>
-								Отрасль
-							</span>
+                    <span class="sort__title btn btn_green catalog__title_green">
+                        <span>
+                            Отрасль
+                        </span>
                         <picture>
                             <source media="(max-width: 539px)" srcset="{{ Vite::asset('resources/images/icons/arrow-white_mob.svg') }}">
                             <img class="arrow" src="{{ Vite::asset('resources/images/icons/arrow-white.svg') }}" alt="стрелочка">
                         </picture>
-                    </button>
+                    </span>
                     <div class="sort__list">
                         @foreach($categories as $category)
                             <div class="sort__list-item">
-                            <span>
-                                {{ $category->name }}
-                            </span>
+                                <button data_name="category" data_id="{{ $category->id }}">{{ $category->name }}</button>
                             </div>
                         @endforeach
                     </div>

@@ -13,6 +13,7 @@ import './jquery-ui'
 function changerActive(list) {
     for(let i = 0; i < list.length; i++) {
         list[i].classList.remove('active')
+
     }
     list = 0
 }
