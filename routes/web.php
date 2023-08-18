@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
+Route::get('/about', [App\Http\Controllers\IndexController::class, 'about'])->name('about');
+Route::get('/how_to_book', [App\Http\Controllers\IndexController::class, 'how_to_book'])->name('how_to_book');
 
 Auth::routes();
 
@@ -47,6 +49,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class); // CRUD model Company
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class); // CRUD model User
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class); // CRUD model Category
+
+        Route::resource('about', \App\Http\Controllers\Admin\AboutController::class); // CRUD model About
+        Route::resource('how_to_book', \App\Http\Controllers\Admin\HowToBookController::class); // CRUD model HowToBook
 
         // docs: https://laravel.com/docs/10.x/controllers
         Route::resource('companies.excursions', \App\Http\Controllers\Admin\ExcursionController::class)->shallow(); // CRUD model Excursion

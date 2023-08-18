@@ -17,10 +17,10 @@
                 <a class="header__nav-item" href="{{ route('excursions.index') }}">
                     Экскурсии
                 </a>
-                <a class="header__nav-item" href="#">
+                <a class="header__nav-item" href="{{ route('how_to_book') }}">
                     Как записаться
                 </a>
-                <a class="header__nav-item" href="#">
+                <a class="header__nav-item" href="{{ route('about') }}">
                     О проекте
                 </a>
             </nav>

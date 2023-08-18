@@ -134,6 +134,22 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.about.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-image"></i>
+                            <p>
+                                Страница о проекте
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.how_to_book.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-image"></i>
+                            <p>
+                                Страница как записаться
+                            </p>
+                        </a>
+                    </li>
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="pages/kanban.html" class="nav-link">--}}
 {{--                            <i class="nav-icon far fa-envelope"></i>--}}
