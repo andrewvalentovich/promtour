@@ -10,7 +10,7 @@
 
     @vite(['resources/sass/app.scss'])
     @yield('styles')
-    <title>Промтур</title>
+    <title>TIUTOUR</title>
 </head>
 <body>
     <div class="wrapper">
